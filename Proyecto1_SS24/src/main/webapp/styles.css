@@ -1,0 +1,79 @@
+/* styles.css */
+body {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#navbar ul li {
+    margin: 0 15px;
+}
+
+#navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 0;
+    display: block;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding: 10px;
+    overflow-y: auto;
+    position: fixed;
+    top: 50px; /* Ajustar según la altura de la barra de navegación */
+    height: calc(100% - 50px); /* Ajustar según la altura de la barra de navegación */
+}
+
+#left-sidebar {
+    left: 0;
+}
+
+#right-sidebar {
+    right: 0;
+}
+
+#content-block {
+    margin: 60px 250px; /* Espacio para las barras laterales y la barra de navegación */
+}
+
+#content-block div {
+    margin: 50px 0;
+    padding: 10px 25px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+#content-block div button{
+    padding: 10px 20px;
+}
+
+.sidecontent {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+}

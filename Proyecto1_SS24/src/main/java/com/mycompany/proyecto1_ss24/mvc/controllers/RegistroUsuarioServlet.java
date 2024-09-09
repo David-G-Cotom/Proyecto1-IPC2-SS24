@@ -6,20 +6,20 @@ package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.data.LogInUsuarioDB;
 import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
  *
  * @author Carlos Cotom
  */
-@WebServlet(name = "InicioSesionServlet", urlPatterns = {"/InicioSesionServlet"})
-public class InicioSesionServlet extends HttpServlet {
+@WebServlet(name = "RegistroUsuarioServlet", urlPatterns = {"/RegistroUsuarioServlet"})
+public class RegistroUsuarioServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -32,19 +32,7 @@ public class InicioSesionServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
-        UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
-        if (usuario == null) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>NO EXISTE EL USUARIO</>");
-            }
-            return;
-        }
-        request.setAttribute("usuarioLogeado", usuario);
-        redireccionarRespones(request, response, usuario);
+            throws ServletException, IOException {        
     }
 
     /**
@@ -57,7 +45,28 @@ public class InicioSesionServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
+            throws ServletException, IOException {
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        String tipoUsuario = request.getParameter("usertype");
+        LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
+        UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
+        if (usuario != null) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>USUARIO YA EXISTENTE</>");
+            }
+            return;
+        }
+        int idTipoUsuario = dataUsuario.getTipoUsuario(tipoUsuario);
+        usuario = dataUsuario.crearUsuario(userName, password, idTipoUsuario);
+        if (usuario == null) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR AL REGISTRAR USUARIO</>");
+            }
+            return;
+        }
+        request.setAttribute("usuarioLogeado", usuario);
+        redireccionarRespones(request, response, usuario);
     }
     
     private void redireccionarRespones(HttpServletRequest request, HttpServletResponse response, UsuarioAplicacion usuario)

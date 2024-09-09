@@ -16,7 +16,7 @@
     <body>
         <div class="login-container">
             <h2>Registrar Usuario</h2>
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="${pageContext.servletContext.contextPath}/RegistroUsuarioServlet">
                 <div class="input-group">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required>
@@ -28,28 +28,14 @@
                 <div class="input-group">
                     <label for="usertype">Tipo de Usuario</label>
                     <select id="usertype" name="usertype">
-                        <option value="EDITOR">EDITOR</option>
-                        <option value="SUSCRIPTOR">SUSCRIPTOR</option>
-                        <option value="INVERSIONISTA">INVERSIONISTA</option>
-                        <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                        <option value="editor">EDITOR</option>
+                        <option value="suscriptor">SUSCRIPTOR</option>
+                        <option value="inversionista">INVERSIONISTA</option>
+                        <option value="administrador-sistema">ADMINISTRADOR</option>
                     </select>
                 </div>                
                 <button type="submit">Registrar</button>
             </form>
         </div>
-        <script>
-            document.getElementById('loginForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                // Aquí puedes agregar la lógica para validar el usuario y la contraseña
-                if (username === '' && password === '') {
-                    alert('Debe completar los campos');
-                } else {
-                    alert('Registro de Usuario Exitoso');
-                }
-            });
-        </script>
     </body>
 </html>

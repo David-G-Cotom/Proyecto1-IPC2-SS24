@@ -16,7 +16,7 @@
     <body>
         <div class="login-container">
             <h2>Iniciar Sesión</h2>
-            <form id="loginForm" method="POST" action="${pageContext.servletContext.contextPath}/InicioSesionServlet">
+            <form id="loginForm" method="GET" action="${pageContext.servletContext.contextPath}/InicioSesionServlet">
                 <div class="input-group">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required>

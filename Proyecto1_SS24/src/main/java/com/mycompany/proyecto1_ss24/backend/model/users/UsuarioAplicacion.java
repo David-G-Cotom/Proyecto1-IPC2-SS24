@@ -28,7 +28,13 @@ public class UsuarioAplicacion {
         this.userName = userName;
         this.password = password;
         this.tipoUsuario = tipoUsuario;
-    }    
+    }
+
+    public UsuarioAplicacion(String userName, String password, int tipoUsuario) {
+        this.userName = userName;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+    }        
 
     public String getPathPhoto() {
         return pathPhoto;

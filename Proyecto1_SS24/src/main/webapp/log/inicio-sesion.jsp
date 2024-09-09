@@ -16,7 +16,7 @@
     <body>
         <div class="login-container">
             <h2>Iniciar Sesión</h2>
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="${pageContext.servletContext.contextPath}/InicioSesionServlet">
                 <div class="input-group">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required>
@@ -28,19 +28,5 @@
                 <button type="submit">Entrar</button>
             </form>
         </div>
-        <script>
-            document.getElementById('loginForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                // Aquí puedes agregar la lógica para validar el usuario y la contraseña
-                if (username === 'admin' && password === 'admin') {
-                    alert('Inicio de sesión exitoso');
-                } else {
-                    alert('Usuario o contraseña incorrectos');
-                }
-            });
-        </script>
     </body>
 </html>

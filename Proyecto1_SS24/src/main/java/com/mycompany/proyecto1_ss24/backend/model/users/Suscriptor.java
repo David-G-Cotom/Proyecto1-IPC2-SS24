@@ -14,15 +14,15 @@ import java.util.ArrayList;
 public class Suscriptor extends UsuarioAplicacion {
     
     private ArrayList<Revista> revistasSuscritas;
-    
-    public Suscriptor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+
+    public Suscriptor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
     }
 
-    public Suscriptor(ArrayList<Revista> revistasSuscritas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+    public Suscriptor(ArrayList<Revista> revistasSuscritas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
         this.revistasSuscritas = revistasSuscritas;
-    }
+    }        
 
     public ArrayList<Revista> getRevistasSuscritas() {
         return revistasSuscritas;

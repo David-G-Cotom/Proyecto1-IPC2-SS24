@@ -16,8 +16,8 @@
     <body>
         <nav id="navbar">
             <ul>
-                <li><a href="#">Iniciar Sesion</a></li>
-                <li><a href="#">Registrarse</a></li>
+                <li><a href="log/inicio-sesion.jsp">Iniciar Sesion</a></li>
+                <li><a href="log/registro-usuario.jsp">Registrarse</a></li>
             </ul>
         </nav>
 

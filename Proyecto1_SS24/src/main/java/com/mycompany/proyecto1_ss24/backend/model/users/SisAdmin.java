@@ -12,9 +12,9 @@ import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
  * @author Carlos Cotom
  */
 public class SisAdmin extends UsuarioAplicacion {
-    
-    public SisAdmin(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+
+    public SisAdmin(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
     }
     
     public boolean ponerPrecioAnuncio(Anuncio anuncio) {

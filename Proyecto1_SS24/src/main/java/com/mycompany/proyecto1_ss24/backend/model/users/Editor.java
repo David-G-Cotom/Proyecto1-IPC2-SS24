@@ -14,15 +14,15 @@ import java.util.ArrayList;
 public class Editor extends UsuarioAplicacion {
     
     private ArrayList<Revista> revistas;
-    
-    public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+
+    public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
     }
 
-    public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+    public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
         this.revistas = revistas;
-    }
+    }        
 
     public ArrayList<Revista> getRevistas() {
         return revistas;

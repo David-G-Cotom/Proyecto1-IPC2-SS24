@@ -15,14 +15,20 @@ public class UsuarioAplicacion {
     private String temasInteres;
     private String descripcion;
     private String gustos;
+    private String userName;
+    private String password;
+    private int tipoUsuario;
 
-    public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
+    public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
         this.pathPhoto = pathPhoto;
         this.hobbies = hobbies;
         this.temasInteres = temasInteres;
         this.descripcion = descripcion;
         this.gustos = gustos;
-    }
+        this.userName = userName;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+    }    
 
     public String getPathPhoto() {
         return pathPhoto;
@@ -70,6 +76,30 @@ public class UsuarioAplicacion {
     
     public void verPerfil() {
         
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    } 
+
+    public int getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(int tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
     
 }

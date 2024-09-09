@@ -17,17 +17,17 @@ public class Inversionista extends UsuarioAplicacion {
     private double credito;
     private ArrayList<Anuncio> anunciosComprados;
     private ArrayList<Pago> pagosHechos;
-    
-    public Inversionista(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+
+    public Inversionista(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
     }
 
-    public Inversionista(double credito, ArrayList<Anuncio> anunciosComprados, ArrayList<Pago> pagosHechos, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos);
+    public Inversionista(double credito, ArrayList<Anuncio> anunciosComprados, ArrayList<Pago> pagosHechos, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
         this.credito = credito;
         this.anunciosComprados = anunciosComprados;
         this.pagosHechos = pagosHechos;
-    }
+    }        
 
     public double getCredito() {
         return credito;

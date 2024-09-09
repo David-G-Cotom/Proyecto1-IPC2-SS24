@@ -49,11 +49,17 @@ public class RegistroUsuarioServlet extends HttpServlet {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         String tipoUsuario = request.getParameter("usertype");
+        if (userName.equals("") || password.equals("")) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR!!! DEBE COMPLETRA TODOS LOS CAMPOS DEL FORMULARIO</h1>");
+            }
+            return;
+        }
         LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
         UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
         if (usuario != null) {
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>USUARIO YA EXISTENTE</>");
+                out.println("<h1>USUARIO YA EXISTENTE</h1>");
             }
             return;
         }
@@ -61,7 +67,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
         usuario = dataUsuario.crearUsuario(userName, password, idTipoUsuario);
         if (usuario == null) {
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>ERROR AL REGISTRAR USUARIO</>");
+                out.println("<h1>ERROR AL REGISTRAR USUARIO</h1>");
             }
             return;
         }

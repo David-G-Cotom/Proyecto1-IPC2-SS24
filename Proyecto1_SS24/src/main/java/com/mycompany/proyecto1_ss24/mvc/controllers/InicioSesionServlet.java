@@ -35,11 +35,17 @@ public class InicioSesionServlet extends HttpServlet {
             throws ServletException, IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        if (userName.equals("") || password.equals("")) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR!!! DEBE COMPLETRA TODOS LOS CAMPOS DEL FORMULARIO</h1>");
+            }
+            return;
+        }
         LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
         UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
         if (usuario == null) {
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>NO EXISTE EL USUARIO</>");
+                out.println("<h1>NO EXISTE EL USUARIO</h1>");
             }
             return;
         }

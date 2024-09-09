@@ -10,8 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagina Principal (Dministrador de Sistema)</title>
-        <link rel="stylesheet" href="asmin/style-interfaz-principal.css">
+        <title>Pagina Principal (Administrador de Sistema)</title>
+        <link rel="stylesheet" href="admin/style-interfaz-principal.css">
     </head>
     <body>
         <div class="sidebar">

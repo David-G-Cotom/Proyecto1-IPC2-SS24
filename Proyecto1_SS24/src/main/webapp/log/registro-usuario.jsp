@@ -31,7 +31,7 @@
                         <option value="editor">EDITOR</option>
                         <option value="suscriptor">SUSCRIPTOR</option>
                         <option value="inversionista">INVERSIONISTA</option>
-                        <option value="administrador-sistema">ADMINISTRADOR</option>
+                        <option value="administrador_sistema">ADMINISTRADOR</option>
                     </select>
                 </div>                
                 <button type="submit">Registrar</button>

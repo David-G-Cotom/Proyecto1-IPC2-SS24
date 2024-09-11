@@ -5,6 +5,7 @@
 package com.mycompany.proyecto1_ss24.backend.model;
 
 import com.mycompany.proyecto1_ss24.backend.model.users.Editor;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -26,8 +27,14 @@ public class Revista {
     private int costo;
     private LocalDate fechaCreacion;
     private ArrayList<Suscripcion> suscripciones;
+    private String nombreRevista;
+    private InputStream archivoPDF;
+    private byte[] bytesArchivo;
 
-    public Revista(boolean puedeComentarse, boolean puedeTenerLikes, boolean puedeSuscribirse, String descripcion, CategoriaEnum categoria, ArrayList<EtiquetaEnum> etiquetas, Editor autor, int likes, ArrayList<Comentario> comentarios, int costo, LocalDate fechaCreacion, ArrayList<Suscripcion> suscripciones) {
+    public Revista() {
+    }
+    
+    public Revista(boolean puedeComentarse, boolean puedeTenerLikes, boolean puedeSuscribirse, String descripcion, CategoriaEnum categoria, ArrayList<EtiquetaEnum> etiquetas, Editor autor, int likes, ArrayList<Comentario> comentarios, int costo, LocalDate fechaCreacion, ArrayList<Suscripcion> suscripciones, String nombreRevista, InputStream archivoPDF, byte[] bytesArchivo) {
         this.puedeComentarse = puedeComentarse;
         this.puedeTenerLikes = puedeTenerLikes;
         this.puedeSuscribirse = puedeSuscribirse;
@@ -40,6 +47,9 @@ public class Revista {
         this.costo = costo;
         this.fechaCreacion = fechaCreacion;
         this.suscripciones = suscripciones;
+        this.nombreRevista = nombreRevista;
+        this.archivoPDF = archivoPDF;
+        this.bytesArchivo = bytesArchivo;
     }
 
     public boolean isPuedeComentarse() {
@@ -137,7 +147,29 @@ public class Revista {
     public void setSuscripciones(ArrayList<Suscripcion> suscripciones) {
         this.suscripciones = suscripciones;
     }
-    
-    
+
+    public String getNombreRevista() {
+        return nombreRevista;
+    }
+
+    public void setNombreRevista(String nombreRevista) {
+        this.nombreRevista = nombreRevista;
+    }
+
+    public InputStream getArchivoPDF() {
+        return archivoPDF;
+    }
+
+    public void setArchivoPDF(InputStream archivoPDF) {
+        this.archivoPDF = archivoPDF;
+    }
+
+    public byte[] getBytesArchivo() {
+        return bytesArchivo;
+    }
+
+    public void setBytesArchivo(byte[] bytesArchivo) {
+        this.bytesArchivo = bytesArchivo;
+    }
     
 }

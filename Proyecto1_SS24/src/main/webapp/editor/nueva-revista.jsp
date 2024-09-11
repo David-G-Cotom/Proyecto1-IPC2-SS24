@@ -106,15 +106,15 @@
                 </fieldset> 
                 <div class="radio-group">
                     <div>                    
-                        <label for="comentario-si"><input type="radio" id="comentario-si" name="comentarios" value="SI"> Recibir Comentarios</label>                    
+                        <label for="comentario-si"><input type="radio" id="comentario-si" name="comentarios" value="SI" checked> Recibir Comentarios</label>                    
                         <label for="comentario-no"><input type="radio" id="comentario-no" name="comentarios" value="NO"> NO Recibir Comentarios</label>
                     </div>
                     <div>                    
-                        <label for="likes-si"><input type="radio" id="likes-si" name="likes" value="SI"> Recibir Likes</label>                    
+                        <label for="likes-si"><input type="radio" id="likes-si" name="likes" value="SI" checked> Recibir Likes</label>                    
                         <label for="likes-no"><input type="radio" id="likes-no" name="likes" value="NO"> NO Recibir Likes</label>
                     </div>
                     <div>                    
-                        <label for="suscripciones-si"><input type="radio" id="suscripciones-si" name="suscripciones" value="SI"> Recibir Suscripciones</label>                    
+                        <label for="suscripciones-si"><input type="radio" id="suscripciones-si" name="suscripciones" value="SI" checked> Recibir Suscripciones</label>                    
                         <label for="suscripciones-no"><input type="radio" id="suscripciones-no" name="suscripciones" value="NO"> NO Recibir Suscripciones</label>
                     </div>
                 </div>

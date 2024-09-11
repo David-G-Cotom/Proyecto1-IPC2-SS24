@@ -4,6 +4,9 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
+import com.mycompany.proyecto1_ss24.backend.model.CreadorRevistas;
+import com.mycompany.proyecto1_ss24.backend.model.Revista;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -11,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  *
@@ -45,7 +49,17 @@ public class NuevaRevistaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        CreadorRevistas creadorRevistas = new CreadorRevistas();
+        try {
+            Revista revistaCreada = creadorRevistas.crearRevista(request);
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>Se creo la Revista: " + revistaCreada.toString() + "</h1>");
+            }
+        } catch (UserDataInvalidException e) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");
+            }
+        }
     }
 
 }

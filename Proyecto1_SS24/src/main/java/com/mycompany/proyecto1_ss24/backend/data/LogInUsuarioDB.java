@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class LogInUsuarioDB {
 
-    private Connection connection = ConexionDB.getConnection();
+    private final Connection connection = ConexionDB.getConnection();
 
     public UsuarioAplicacion getUsuario(String userName, String password) {
         String query = "SELECT * FROM usuario WHERE user_name = ? AND user_password = ?";
@@ -26,6 +26,7 @@ public class LogInUsuarioDB {
             prepared.setString(2, password);
             try (ResultSet resul = prepared.executeQuery()) {
                 if (resul.next()) {
+                    int idUsuario = resul.getInt("id_usuario");
                     String pathPhoto = resul.getString("foto");
                     String hobbies = resul.getString("hobbie");
                     String temasInteres = resul.getString("temas_interes");
@@ -33,7 +34,7 @@ public class LogInUsuarioDB {
                     String gustos = resul.getString("gustos");
                     int tipoUsuairo = resul.getInt("tipo_usuario");
                     String nombre = resul.getString("nombre");
-                    usuario = new UsuarioAplicacion(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo, nombre);                    
+                    usuario = new UsuarioAplicacion(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo, nombre, idUsuario);                    
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir usuario: " + e);
@@ -76,7 +77,87 @@ public class LogInUsuarioDB {
         } catch (SQLException e) {
             System.out.println("Error en crear un Usuario: " + e);
         }
+        this.crearTipoUsuario(usuario);        
         return usuario;
+    }
+    
+    private void crearTipoUsuario(UsuarioAplicacion usuario) {
+        int idUsuario = this.getIdUsuario(usuario);
+        switch (usuario.getTipoUsuario()) {
+            case 1://editor
+                this.crearEditor(idUsuario);
+                break;
+            case 2://suscriptor
+                this.crearSuscriptor(idUsuario);
+                break;
+            case 3://inverssionista
+                this.crearInversionista(idUsuario);
+                break;
+            case 4://administrador
+                this.crearSisAdmin(idUsuario);
+                break;            
+        }
+    }
+    
+    private int getIdUsuario(UsuarioAplicacion usuario) {
+        String query = "SELECT id_usuario FROM usuario WHERE user_name = ? AND user_password = ?";
+        int idUsuario = 0;
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setString(1, usuario.getUserName());
+            prepared.setString(2, usuario.getPassword());
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    idUsuario = resul.getInt("id_usuario");                    
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el id del usuario: " + e);
+            }
+        } catch (SQLException e) {            
+            System.out.println("Error en recibir el id del usuario: " + e);
+        }
+        return idUsuario;
+    }
+    
+    private void crearEditor(int idUsuario) {
+        String query = "INSERT INTO editor (usuario) VALUES (?)";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idUsuario);
+            prepared.executeUpdate();
+            System.out.println("Nuevo Editor Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Editor: " + e);
+        }
+    }
+    private void crearSuscriptor(int idUsuario) {
+        String query = "INSERT INTO suscriptor (usuario) VALUES (?)";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idUsuario);
+            prepared.executeUpdate();
+            System.out.println("Nuevo Suscriptor Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Suscriptor: " + e);
+        }
+    }
+    private void crearInversionista(int idUsuario) {
+        String query = "INSERT INTO inversionista (credito, usuario) VALUES (?, ?)";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setDouble(1, 0);
+            prepared.setInt(2, idUsuario);
+            prepared.executeUpdate();
+            System.out.println("Nuevo Inversionista Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Inversionista: " + e);
+        }
+    }
+    private void crearSisAdmin(int idUsuario) {
+        String query = "INSERT INTO administrador_sistema (usuario) VALUES (?)";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idUsuario);
+            prepared.executeUpdate();
+            System.out.println("Nuevo Administrador Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Administrador: " + e);
+        }
     }
 
 }

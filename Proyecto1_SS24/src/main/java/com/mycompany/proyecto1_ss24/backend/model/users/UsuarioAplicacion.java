@@ -19,8 +19,9 @@ public class UsuarioAplicacion {
     private String password;
     private int tipoUsuario;
     private String nombre;
+    private int idUsuario;
 
-    public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre) {
+    public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         this.pathPhoto = pathPhoto;
         this.hobbies = hobbies;
         this.temasInteres = temasInteres;
@@ -30,6 +31,7 @@ public class UsuarioAplicacion {
         this.password = password;
         this.tipoUsuario = tipoUsuario;
         this.nombre = nombre;
+        this.idUsuario = idUsuario;
     }
 
     public UsuarioAplicacion(String userName, String password, int tipoUsuario, String nombre) {
@@ -117,6 +119,14 @@ public class UsuarioAplicacion {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
 }

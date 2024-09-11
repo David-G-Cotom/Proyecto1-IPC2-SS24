@@ -15,12 +15,12 @@ public class Editor extends UsuarioAplicacion {
     
     private ArrayList<Revista> revistas;
 
-    public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
+    public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre);
     }
 
-    public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario) {
-        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario);
+    public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre) {
+        super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre);
         this.revistas = revistas;
     }        
 

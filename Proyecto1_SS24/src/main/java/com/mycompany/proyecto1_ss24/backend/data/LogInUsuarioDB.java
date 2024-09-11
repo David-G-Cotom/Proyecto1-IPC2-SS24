@@ -32,7 +32,8 @@ public class LogInUsuarioDB {
                     String descripcion = resul.getString("descripcion");
                     String gustos = resul.getString("gustos");
                     int tipoUsuairo = resul.getInt("tipo_usuario");
-                    usuario = new UsuarioAplicacion(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo);                    
+                    String nombre = resul.getString("nombre");
+                    usuario = new UsuarioAplicacion(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo, nombre);                    
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir usuario: " + e);
@@ -61,15 +62,16 @@ public class LogInUsuarioDB {
         return idTipo;
     }
     
-    public UsuarioAplicacion crearUsuario(String userName, String password, int tipoUsuario) {
-        String query = "INSERT INTO usuario (tipo_usuario, user_name, user_password) VALUES (?, ?, ?)";
+    public UsuarioAplicacion crearUsuario(String userName, String password, int tipoUsuario, String nombre) {
+        String query = "INSERT INTO usuario (tipo_usuario, user_name, user_password, nombre) VALUES (?, ?, ?, ?)";
         UsuarioAplicacion usuario = null;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
             prepared.setInt(1, tipoUsuario);
             prepared.setString(2, userName);
             prepared.setString(3, password);
+            prepared.setString(4, nombre);
             prepared.executeUpdate();
-            usuario = new UsuarioAplicacion(userName, password, tipoUsuario);
+            usuario = new UsuarioAplicacion(userName, password, tipoUsuario, nombre);
             System.out.println("Nuevo Usuario Creado");
         } catch (SQLException e) {
             System.out.println("Error en crear un Usuario: " + e);

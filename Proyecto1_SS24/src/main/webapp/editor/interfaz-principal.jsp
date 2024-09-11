@@ -25,7 +25,7 @@
             </ul>
         </div>
         <div class="content">
-            <h1>Bienvenido Autor</h1>
+            <h1>Bienvenido Autor: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>
             <p>Estas son tus Revistas Registradas en el Sistema</p>
             <div>
                 <h2>Revista</h2>

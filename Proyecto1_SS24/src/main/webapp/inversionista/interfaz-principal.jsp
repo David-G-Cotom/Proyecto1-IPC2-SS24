@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="content">
-            <h1>Bienvenido Inversionista</h1>
+            <h1>Bienvenido Inversionista: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>
             <p>Estas son tus Anuncios Registradas en el Sistema</p>
             <div>
                 <h2>Anuncio</h2>

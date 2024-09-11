@@ -33,7 +33,11 @@
                         <option value="inversionista">INVERSIONISTA</option>
                         <option value="administrador_sistema">ADMINISTRADOR</option>
                     </select>
-                </div>                
+                </div>
+                <div class="input-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
                 <button type="submit">Registrar</button>
             </form>
         </div>

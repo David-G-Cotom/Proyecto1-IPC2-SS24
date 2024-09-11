@@ -22,7 +22,7 @@
             </ul>
         </div>
         <div class="content">
-            <h1>Bienvenido Suscriptor</h1>
+            <h1>Bienvenido Suscriptor: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>
             <div class="form-container">
                 <h2>Busqueda de Revistas Suscritas</h2>
                 <form method="POST" action="">

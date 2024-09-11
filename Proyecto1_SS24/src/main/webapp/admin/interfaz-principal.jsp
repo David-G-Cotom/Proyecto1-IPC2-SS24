@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="content">
-            <h1>Bienvenido Administrador de Sistema</h1>   
+            <h1>Bienvenido Administrador de Sistema: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>   
 
             <div id="editar-precio-tipo-anuncio">
                 <h2>Edicion de Precios para los Tipos de Anuncios</h2>

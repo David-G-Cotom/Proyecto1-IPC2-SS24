@@ -49,7 +49,8 @@ public class RegistroUsuarioServlet extends HttpServlet {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         String tipoUsuario = request.getParameter("usertype");
-        if (userName.equals("") || password.equals("")) {
+        String nombre = request.getParameter("name");
+        if (userName.equals("") || password.equals("") || nombre.equals("")) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR!!! DEBE COMPLETRA TODOS LOS CAMPOS DEL FORMULARIO</h1>");
             }
@@ -64,7 +65,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
             return;
         }
         int idTipoUsuario = dataUsuario.getTipoUsuario(tipoUsuario);
-        usuario = dataUsuario.crearUsuario(userName, password, idTipoUsuario);
+        usuario = dataUsuario.crearUsuario(userName, password, idTipoUsuario, nombre);
         if (usuario == null) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR AL REGISTRAR USUARIO</h1>");

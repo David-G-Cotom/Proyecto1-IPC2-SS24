@@ -49,9 +49,10 @@ public class NuevaRevistaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         CreadorRevistas creadorRevistas = new CreadorRevistas();
         try {
-            Revista revistaCreada = creadorRevistas.crearRevista(request);
+            Revista revistaCreada = creadorRevistas.crearRevista(request, idUsuario);
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>Se creo la Revista: " + revistaCreada.toString() + "</h1>");
             }

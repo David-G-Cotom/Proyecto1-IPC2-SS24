@@ -99,7 +99,7 @@ public class LogInUsuarioDB {
         }
     }
     
-    private int getIdUsuario(UsuarioAplicacion usuario) {
+    public int getIdUsuario(UsuarioAplicacion usuario) {
         String query = "SELECT id_usuario FROM usuario WHERE user_name = ? AND user_password = ?";
         int idUsuario = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {

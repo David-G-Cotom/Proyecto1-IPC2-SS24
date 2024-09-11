@@ -16,29 +16,32 @@ import java.sql.SQLException;
  * @author Carlos Cotom
  */
 public class RevistaDB {
-    
-    private Connection connection = ConexionDB.getConnection();
-    
-    public void crearRevista(Revista revista) {
-        String query = "INSERT INTO revista (descripcion, fecha_creacion, nombre, estado_comentarios, estado_likes, estado_suscripcion, categoria, archivo_pdf) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    private final Connection connection = ConexionDB.getConnection();
+
+    public void crearRevista(Revista revista, int idUsuario) {
+        String query = "INSERT INTO revista (editor, descripcion, likes, costo, fecha_creacion, nombre, estado_comentarios, estado_likes, estado_suscripcion, categoria, archivo_pdf) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
-            //editor
-            prepared.setString(1, revista.getDescripcion());
-            prepared.setString(2, revista.getFechaCreacion().toString());
-            prepared.setString(3, revista.getNombreRevista());
-            prepared.setBoolean(4, revista.isPuedeComentarse());
-            prepared.setBoolean(5, revista.isPuedeTenerLikes());
-            prepared.setBoolean(6, revista.isPuedeSuscribirse());
+            int idAutor = this.getIdEditor(idUsuario);
+            prepared.setInt(1, idAutor);
+            prepared.setString(2, revista.getDescripcion());
+            prepared.setInt(3, 0);
+            prepared.setDouble(4, 0);
+            prepared.setString(5, revista.getFechaCreacion().toString());
+            prepared.setString(6, revista.getNombreRevista());
+            prepared.setBoolean(7, revista.isPuedeComentarse());
+            prepared.setBoolean(8, revista.isPuedeTenerLikes());
+            prepared.setBoolean(9, revista.isPuedeSuscribirse());
             int idCategoria = this.getIdCategoria(revista.getCategoria());
-            prepared.setInt(7, idCategoria);
-            prepared.setBlob(8, revista.getArchivoPDF());
+            prepared.setInt(10, idCategoria);
+            prepared.setBlob(11, revista.getArchivoPDF());
             prepared.executeUpdate();
             System.out.println("Revista Creada!!!");
         } catch (SQLException e) {
             System.out.println("Error en crear una Revista: " + e);
         }
     }
-    
+
     private int getIdCategoria(CategoriaEnum categoria) {
         String query = "SELECT id_categoria FROM categoria WHERE tipo = ?";
         int id = 0;
@@ -56,15 +59,15 @@ public class RevistaDB {
         }
         return id;
     }
-    
-    private int getIdEditor() {
-        String query = "";
+
+    private int getIdEditor(int idUsuario) {
+        String query = "Select id_editor FROM editor WHERE usuario = ?";
         int idAutor = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
-            
+            prepared.setInt(1, idUsuario);
             try (ResultSet resul = prepared.executeQuery()) {
                 if (resul.next()) {
-                    
+                    idAutor = resul.getInt("id_editor");
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir el id del Autor: " + e);
@@ -74,5 +77,5 @@ public class RevistaDB {
         }
         return idAutor;
     }
-    
+
 }

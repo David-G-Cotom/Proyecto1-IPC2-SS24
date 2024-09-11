@@ -23,9 +23,9 @@ public class CreadorRevistas {
     
     private RevistaDB dataRevista = new RevistaDB();
     
-    public Revista crearRevista(HttpServletRequest request) throws UserDataInvalidException {
+    public Revista crearRevista(HttpServletRequest request, int idUsuario) throws UserDataInvalidException {
         Revista nuevaRevista = this.extraerYValidar(request);        
-        dataRevista.crearRevista(nuevaRevista);        
+        dataRevista.crearRevista(nuevaRevista, idUsuario);        
         return nuevaRevista;
     }
     
@@ -59,7 +59,7 @@ public class CreadorRevistas {
     }
     
     private ArrayList<EtiquetaEnum> extraerEtiquetas(String[] etiquetas) {        
-        if (etiquetas.length > 0) {
+        if (etiquetas != null) {
             ArrayList<EtiquetaEnum> etiquetasEnum = new ArrayList<>();
             for (String etiqueta : etiquetas) {                
                 etiquetasEnum.add(EtiquetaEnum.valueOf(etiqueta));

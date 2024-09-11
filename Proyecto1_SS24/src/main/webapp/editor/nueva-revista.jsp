@@ -17,6 +17,7 @@
         <div class="form-container">
             <h1>Nueva Revista</h1>
             <form method="POST" action="${pageContext.servletContext.contextPath}/NuevaRevistaServlet" enctype="multipart/form-data">
+                <input type="hidden" name="idUsuario" value="${param.id}">
                 <div class="input-group">
                     <label for="nombreRevista">Nombre de la Revista:</label>
                     <input type="text" id="nombreRevista" name="nombreRevista"/>

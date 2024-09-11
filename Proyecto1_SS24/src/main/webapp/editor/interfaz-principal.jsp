@@ -17,7 +17,7 @@
         <div class="sidebar">
             <h2>Menú</h2>
             <ul>
-                <li><a href="editor/nueva-revista.jsp">Crear Revista</a></li>
+                <li><a href="editor/nueva-revista.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Crear Revista</a></li>
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Reporte de Comentarios</a></li>
                 <li><a href="#">Reporte de Suscripciones</a></li>

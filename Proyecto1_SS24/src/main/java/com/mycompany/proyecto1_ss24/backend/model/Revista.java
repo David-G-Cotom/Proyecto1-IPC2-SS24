@@ -171,5 +171,18 @@ public class Revista {
     public void setBytesArchivo(byte[] bytesArchivo) {
         this.bytesArchivo = bytesArchivo;
     }
+
+    @Override
+    public String toString() {
+        return "Revista{ "
+                + "<br>puedeComentarse = " + puedeComentarse
+                + "<br>puedeTenerLikes = " + puedeTenerLikes
+                + "<br>puedeSuscribirse = " + puedeSuscribirse
+                + "<br>descripcion = " + descripcion
+                + "<br>categoria = " + categoria
+                + "<br>etiquetas = " + etiquetas
+                + "<br>fechaCreacion = " + fechaCreacion
+                + "<br>nombreRevista = " + nombreRevista + '}';
+    }
     
 }

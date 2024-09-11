@@ -72,6 +72,8 @@ public class RegistroUsuarioServlet extends HttpServlet {
             }
             return;
         }
+        int idUsuario = dataUsuario.getIdUsuario(usuario);
+        usuario.setIdUsuario(idUsuario);
         request.setAttribute("usuarioLogeado", usuario);
         redireccionarRespones(request, response, usuario);
     }

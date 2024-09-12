@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -60,7 +63,7 @@ public class RevistaDB {
         return id;
     }
 
-    private int getIdEditor(int idUsuario) {
+    public int getIdEditor(int idUsuario) {
         String query = "Select id_editor FROM editor WHERE usuario = ?";
         int idAutor = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
@@ -77,7 +80,7 @@ public class RevistaDB {
         }
         return idAutor;
     }
-    
+
     public boolean editarRevista(int idRevista, boolean comentarios, boolean likes, boolean suscripciones) {
         String query = "UPDATE revista SET estado_comentarios = ?, estado_likes = ?, estado_suscripcion = ? WHERE id_revista = ?";
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
@@ -89,9 +92,57 @@ public class RevistaDB {
             System.out.println("Estados de la Revista Actualizada!!!");
             return true;
         } catch (SQLException e) {
-            System.out.println("Error al Actualizar los Estados de la Revista" + e);
+            System.out.println("Error al Actualizar los Estados de la Revista " + e);
             return false;
         }
+    }
+
+    public ArrayList<Revista> getRevistas(int idEditor) {
+        String query = "SELECT * FROM revista WHERE editor = ?";
+        ArrayList<Revista> revistas = new ArrayList<>();
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idEditor);
+            try (ResultSet resul = prepared.executeQuery()) {
+                while (resul.next()) {
+                    int idRevista = resul.getInt("id_revista");
+                    String descripcion = resul.getString("descripcion");
+                    int likes = resul.getInt("likes");
+                    String nombre = resul.getString("nombre");
+                    int idCategoria = resul.getInt("categoria");
+                    String categoria = this.getCategoria(idCategoria);
+                    Revista revista = new Revista(descripcion, CategoriaEnum.valueOf(categoria), likes, nombre, idRevista);
+                    revistas.add(revista);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir las revistas de un autor " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir las revistas de un autor " + e);
+        }
+
+        return revistas;
+    }
+    
+    private String getCategoria(int idCategoria) {
+        String query = "SELECT tipo FROM categoria WHERE id_categoria = ?";
+        String categoria = "";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idCategoria);
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    categoria = resul.getString("tipo");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el tipo de Categoria: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el tipo de Categoria: " + e);
+        }
+        return categoria;
+    }
+    
+    private void getEtiquetas() {
+        
     }
 
 }

@@ -30,6 +30,7 @@ public class Revista {
     private String nombreRevista;
     private InputStream archivoPDF;
     private byte[] bytesArchivo;
+    private int idRevista;
 
     public Revista() {
     }
@@ -50,6 +51,14 @@ public class Revista {
         this.nombreRevista = nombreRevista;
         this.archivoPDF = archivoPDF;
         this.bytesArchivo = bytesArchivo;
+    }
+
+    public Revista(String descripcion, CategoriaEnum categoria, int likes, String nombreRevista, int idRevista) {
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.likes = likes;
+        this.nombreRevista = nombreRevista;
+        this.idRevista = idRevista;
     }
 
     public boolean isPuedeComentarse() {
@@ -170,6 +179,14 @@ public class Revista {
 
     public void setBytesArchivo(byte[] bytesArchivo) {
         this.bytesArchivo = bytesArchivo;
+    }
+
+    public int getIdRevista() {
+        return idRevista;
+    }
+
+    public void setIdRevista(int idRevista) {
+        this.idRevista = idRevista;
     }
 
     @Override

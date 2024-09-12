@@ -4,6 +4,10 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.RevistaDB" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,22 +31,25 @@
         <div class="content">
             <h1>Bienvenido Autor: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>
             <p>Estas son tus Revistas Registradas en el Sistema</p>
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Likes</p>
-                <a href="editor/editar-revista.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
-            </div>             
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Likes</p>
-                <a href="editor/editar-revista.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
-            </div>           
+            <%
+                ArrayList<Revista> revistas = new ArrayList<>();
+                RevistaDB dataRevistas = new RevistaDB();
+                UsuarioAplicacion usuario = (UsuarioAplicacion) request.getAttribute("usuarioLogeado");
+                int idEditor = dataRevistas.getIdEditor(usuario.getIdUsuario());
+                revistas = dataRevistas.getRevistas(4);
+                for(Revista revista : revistas) {
+            %>
+                <div>
+                    <h2>Nombre de Revista: <%=revista.getNombreRevista()%></h2>
+                    <p>Descripcion de Revista: <%=revista.getDescripcion()%></p>
+                    <p>Categoria: <%=revista.getCategoria()%></p>
+                    <p>Etiquetas: </p>
+                    <p>Likes: <%=revista.getLikes()%></p>
+                    <a href="editor/editar-revista.jsp?id=<%=revista.getIdRevista()%>">Editar</a>
+                </div>
+            <%
+                }
+            %>          
         </div> 
     </body>
 </html>

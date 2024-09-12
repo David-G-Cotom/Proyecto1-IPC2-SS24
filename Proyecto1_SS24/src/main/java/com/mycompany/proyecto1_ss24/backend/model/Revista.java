@@ -53,9 +53,10 @@ public class Revista {
         this.bytesArchivo = bytesArchivo;
     }
 
-    public Revista(String descripcion, CategoriaEnum categoria, int likes, String nombreRevista, int idRevista) {
+    public Revista(String descripcion, CategoriaEnum categoria, ArrayList<EtiquetaEnum> etiquetas, int likes, String nombreRevista, int idRevista) {
         this.descripcion = descripcion;
         this.categoria = categoria;
+        this.etiquetas = etiquetas;
         this.likes = likes;
         this.nombreRevista = nombreRevista;
         this.idRevista = idRevista;

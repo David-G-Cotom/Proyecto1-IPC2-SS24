@@ -21,11 +21,14 @@ import java.util.ArrayList;
  */
 public class CreadorRevistas {
     
-    private RevistaDB dataRevista = new RevistaDB();
+    private final RevistaDB dataRevista = new RevistaDB();
     
     public Revista crearRevista(HttpServletRequest request, int idUsuario) throws UserDataInvalidException {
         Revista nuevaRevista = this.extraerYValidar(request);        
-        dataRevista.crearRevista(nuevaRevista, idUsuario);        
+        dataRevista.crearRevista(nuevaRevista, idUsuario);
+        int idRevista = dataRevista.getIdRevistaCreada();
+        nuevaRevista.setIdRevista(idRevista);
+        dataRevista.crearEtiquetas(idRevista, nuevaRevista.getEtiquetas());
         return nuevaRevista;
     }
     
@@ -47,7 +50,7 @@ public class CreadorRevistas {
         }
         nuevaRevista.setCategoria(CategoriaEnum.valueOf(request.getParameter("categoria")));
         String[] etiquetas = request.getParameterValues("tags");
-        nuevaRevista.setEtiquetas(this.extraerEtiquetas(etiquetas));                
+        nuevaRevista.setEtiquetas(this.extraerEtiquetas(etiquetas));              
         String respuestaComentarios = request.getParameter("comentarios");
         nuevaRevista.setPuedeComentarse(respuestaComentarios.equals("SI"));
         String respuestaLikes = request.getParameter("likes");

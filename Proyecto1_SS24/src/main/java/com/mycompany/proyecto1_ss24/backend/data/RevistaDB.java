@@ -5,6 +5,7 @@
 package com.mycompany.proyecto1_ss24.backend.data;
 
 import com.mycompany.proyecto1_ss24.backend.model.CategoriaEnum;
+import com.mycompany.proyecto1_ss24.backend.model.EtiquetaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -110,7 +110,8 @@ public class RevistaDB {
                     String nombre = resul.getString("nombre");
                     int idCategoria = resul.getInt("categoria");
                     String categoria = this.getCategoria(idCategoria);
-                    Revista revista = new Revista(descripcion, CategoriaEnum.valueOf(categoria), likes, nombre, idRevista);
+                    ArrayList<EtiquetaEnum> etiquetas = this.getEtiquetas(idRevista);
+                    Revista revista = new Revista(descripcion, CategoriaEnum.valueOf(categoria), etiquetas, likes, nombre, idRevista);
                     revistas.add(revista);
                 }
             } catch (SQLException e) {
@@ -141,8 +142,91 @@ public class RevistaDB {
         return categoria;
     }
     
-    private void getEtiquetas() {
-        
+    private ArrayList<Integer> getIdTiposEtiquetas(ArrayList<EtiquetaEnum> etiquetas) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (EtiquetaEnum etiqueta : etiquetas) {
+            String query = "SELECT id_tipo FROM tipo_etiqueta WHERE tipo = ?";
+            try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+                prepared.setString(1, etiqueta.toString());
+                try (ResultSet resul = prepared.executeQuery()) {
+                    if (resul.next()) {
+                        ids.add(resul.getInt("id_tipo"));
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error en recibir el id de la Etiqueta: " + e);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el id de la Etiqueta: " + e);
+            }            
+        }
+        return ids;
+    }
+    
+    public void crearEtiquetas(int idRevista, ArrayList<EtiquetaEnum> etiquetas) {
+        ArrayList<Integer> ids = this.getIdTiposEtiquetas(etiquetas);
+        for (Integer id : ids) {
+            String query = "INSERT INTO etiqueta (revista, tipo_etiqueta) VALUES (?, ?)";
+            try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+                prepared.setInt(1, idRevista);
+                prepared.setInt(2, id);
+                prepared.executeUpdate();
+                System.out.println("Etiqueta Creada!!!");
+            } catch (SQLException e) {
+                System.out.println("Error en crear una Etiqueta: " + e);
+            }
+        }
+    }
+    
+    public int getIdRevistaCreada() {
+        String query = "Select id_revista FROM revista ORDER BY id_revista DESC LIMIT 1";
+        int idRevista = 0;
+        try (Statement state = connection.createStatement(); ResultSet resultSet = state.executeQuery(query)) {
+            if (resultSet.next()) {
+                idRevista = resultSet.getInt("id_revista");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el id de la Ultima Revista Creada: " + e);
+        }
+        return idRevista;
+    }
+    
+    private ArrayList<EtiquetaEnum> getEtiquetas(int idRevista) {
+        ArrayList<Integer> ids = this.getTipoEtiquetas(idRevista);
+        ArrayList<EtiquetaEnum> etiquetas = new ArrayList<>();
+        for (Integer id : ids) {
+            String query = "SELECT tipo FROM tipo_etiqueta WHERE id_tipo = ?";
+            try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+                prepared.setInt(1, id);
+                try (ResultSet resul = prepared.executeQuery()) {
+                    if (resul.next()) {
+                        etiquetas.add(EtiquetaEnum.valueOf(resul.getString("tipo")));
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+            }
+        }
+        return etiquetas;
+    }
+    
+    private ArrayList<Integer> getTipoEtiquetas(int idRevista) {
+        String query = "SELECT tipo_etiqueta FROM etiqueta WHERE revista = ?";
+        ArrayList<Integer> idsTipoEtiqueta = new ArrayList<>();
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idRevista);
+            try (ResultSet resul = prepared.executeQuery()) {
+                while (resul.next()) {
+                    idsTipoEtiqueta.add(resul.getInt("tipo_etiqueta"));                    
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
+        }
+        return idsTipoEtiqueta;
     }
 
 }

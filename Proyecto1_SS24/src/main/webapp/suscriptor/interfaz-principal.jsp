@@ -4,6 +4,10 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.RevistaDB" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -101,8 +105,8 @@
                 <h2 style="text-align: center;">Revistas Suscritas</h2>
                 <div>
                     <h3>Revista</h3>
-                    <a href="#">Leer</a>                   
-                    <a href="#">Descargar</a>                   
+                    <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=0%>">Leer</a>                   
+                    <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=0%>">Descargar</a>                   
                     <a href="#">Comentar</a>                   
                     <a href="#">Autor</a>                   
                     <a href="#">Dar Like</a>                   
@@ -117,6 +121,27 @@
                     <a href="#">Dar Like</a>                   
                     <hr>
                 </div>
+                <!--
+                <%
+                    /*ArrayList<Revista> revistas = new ArrayList<>();
+                    RevistaDB dataRevistas = new RevistaDB();
+                    UsuarioAplicacion usuario = (UsuarioAplicacion) request.getAttribute("usuarioLogeado");
+                    int idEditor = dataRevistas.getIdEditor(usuario.getIdUsuario());
+                    revistas = dataRevistas.getRevistas(idEditor);
+                    for(Revista revista : revistas) {*/
+                %>
+                <div>
+                    <h3>Nombre de Revista: <%//revista.getNombreRevista()%></h3>
+                    <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%//revista.getIdRevista()%>">Leer</a>                   
+                    <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%//revista.getIdRevista()%>">Descargar</a>
+                    <a href="#">Comentar</a>                   
+                    <a href="#">Autor</a>                   
+                    <a href="#">Dar Like</a>
+                </div>
+                <%
+                    //}
+                %>
+                -->
             </div>           
         </div> 
     </body>

@@ -7,12 +7,17 @@ package com.mycompany.proyecto1_ss24.backend.data;
 import com.mycompany.proyecto1_ss24.backend.model.CategoriaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.EtiquetaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -64,7 +69,7 @@ public class RevistaDB {
     }
 
     public int getIdEditor(int idUsuario) {
-        String query = "Select id_editor FROM editor WHERE usuario = ?";
+        String query = "SELECT id_editor FROM editor WHERE usuario = ?";
         int idAutor = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
             prepared.setInt(1, idUsuario);
@@ -123,7 +128,7 @@ public class RevistaDB {
 
         return revistas;
     }
-    
+
     private String getCategoria(int idCategoria) {
         String query = "SELECT tipo FROM categoria WHERE id_categoria = ?";
         String categoria = "";
@@ -141,7 +146,7 @@ public class RevistaDB {
         }
         return categoria;
     }
-    
+
     private ArrayList<Integer> getIdTiposEtiquetas(ArrayList<EtiquetaEnum> etiquetas) {
         ArrayList<Integer> ids = new ArrayList<>();
         for (EtiquetaEnum etiqueta : etiquetas) {
@@ -157,11 +162,11 @@ public class RevistaDB {
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir el id de la Etiqueta: " + e);
-            }            
+            }
         }
         return ids;
     }
-    
+
     public void crearEtiquetas(int idRevista, ArrayList<EtiquetaEnum> etiquetas) {
         ArrayList<Integer> ids = this.getIdTiposEtiquetas(etiquetas);
         for (Integer id : ids) {
@@ -176,7 +181,7 @@ public class RevistaDB {
             }
         }
     }
-    
+
     public int getIdRevistaCreada() {
         String query = "Select id_revista FROM revista ORDER BY id_revista DESC LIMIT 1";
         int idRevista = 0;
@@ -189,7 +194,7 @@ public class RevistaDB {
         }
         return idRevista;
     }
-    
+
     private ArrayList<EtiquetaEnum> getEtiquetas(int idRevista) {
         ArrayList<Integer> ids = this.getTipoEtiquetas(idRevista);
         ArrayList<EtiquetaEnum> etiquetas = new ArrayList<>();
@@ -210,7 +215,7 @@ public class RevistaDB {
         }
         return etiquetas;
     }
-    
+
     private ArrayList<Integer> getTipoEtiquetas(int idRevista) {
         String query = "SELECT tipo_etiqueta FROM etiqueta WHERE revista = ?";
         ArrayList<Integer> idsTipoEtiqueta = new ArrayList<>();
@@ -218,7 +223,7 @@ public class RevistaDB {
             prepared.setInt(1, idRevista);
             try (ResultSet resul = prepared.executeQuery()) {
                 while (resul.next()) {
-                    idsTipoEtiqueta.add(resul.getInt("tipo_etiqueta"));                    
+                    idsTipoEtiqueta.add(resul.getInt("tipo_etiqueta"));
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
@@ -227,6 +232,24 @@ public class RevistaDB {
             System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
         }
         return idsTipoEtiqueta;
+    }
+
+    public byte[] getPdfRevista(int idRevista) {
+        String query = "SELECT archivo_pdf FROM revista WHERE id_revista= ?";
+        byte[] dataPdf = null;
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idRevista);
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    dataPdf = resul.getBytes("archivo_pdf");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el COntenido de la Revista PDF: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el COntenido de la Revista PDF: " + e);
+        }
+        return dataPdf;
     }
 
 }

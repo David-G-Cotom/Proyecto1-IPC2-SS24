@@ -15,6 +15,9 @@ public class Editor extends UsuarioAplicacion {
     
     private ArrayList<Revista> revistas;
 
+    public Editor() {
+    }
+    
     public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
     }

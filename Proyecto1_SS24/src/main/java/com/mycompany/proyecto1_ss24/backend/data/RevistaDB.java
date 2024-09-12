@@ -7,17 +7,12 @@ package com.mycompany.proyecto1_ss24.backend.data;
 import com.mycompany.proyecto1_ss24.backend.model.CategoriaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.EtiquetaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -125,7 +120,6 @@ public class RevistaDB {
         } catch (SQLException e) {
             System.out.println("Error en recibir las revistas de un autor " + e);
         }
-
         return revistas;
     }
 

@@ -21,6 +21,9 @@ public class UsuarioAplicacion {
     private String nombre;
     private int idUsuario;
 
+    public UsuarioAplicacion() {
+    }
+    
     public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         this.pathPhoto = pathPhoto;
         this.hobbies = hobbies;

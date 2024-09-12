@@ -4,6 +4,10 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.SuscripcionDB" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,33 +20,28 @@
     <body>
         <div class="content">
             <h1>Revistas NO Suscritas</h1>
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion</p>                   
-                <p>Categoria</p>                   
-                <p>Etiquetas</p>                   
-                <p>Autor</p>                   
-                <p>Likes</p>
-                <a href="#" target="_blank">Suscribir</a>
-            </div>          
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion</p>                   
-                <p>Categoria</p>                   
-                <p>Etiquetas</p>                   
-                <p>Autor</p>                   
-                <p>Likes</p>
-                <a href="#" target="_blank">Suscribir</a>
-            </div>          
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion</p>                   
-                <p>Categoria</p>                   
-                <p>Etiquetas</p>                   
-                <p>Autor</p>                   
-                <p>Likes</p>
-                <a href="#" target="_blank">Suscribir</a>
-            </div>          
+            <%
+                ArrayList<Revista> revistas = new ArrayList<>();
+                SuscripcionDB dataRevistas = new SuscripcionDB();
+                String id = (String) request.getParameter("id");
+                System.out.println(id);
+                int idUsuario = Integer.parseInt(id);
+                revistas = dataRevistas.getRevistasNoSuscritas(idUsuario);
+                System.out.println(revistas);
+                for(Revista revista : revistas) {
+            %>
+                <div>
+                    <h2>Nombre de Revista: <%=revista.getNombreRevista()%></h2>
+                    <p>Descripcion de Revista: <%=revista.getDescripcion()%></p>
+                    <p>Categoria: <%=revista.getCategoria()%></p>
+                    <p>Etiquetas: <%=revista.getEtiquetas()%></p>
+                    <p>Nombre del Autor: <%=revista.getAutor().getNombre()%></p>
+                    <p>Likes: <%=revista.getLikes()%></p>
+                    <a href="editor/editar-revista.jsp?id=<%=revista.getIdRevista()%>" target="_blank">Suscribir</a>
+                </div>
+            <%
+                }
+            %>
         </div>
     </body>
 </html>

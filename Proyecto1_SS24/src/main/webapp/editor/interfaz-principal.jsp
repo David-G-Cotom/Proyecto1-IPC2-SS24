@@ -33,7 +33,7 @@
                 <p>Categirias</p>
                 <p>Etiquetas</p>
                 <p>Likes</p>
-                <a href="#">Editar</a>
+                <a href="editor/editar-revista.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
             </div>             
             <div>
                 <h2>Revista</h2>
@@ -41,16 +41,8 @@
                 <p>Categirias</p>
                 <p>Etiquetas</p>
                 <p>Likes</p>
-                <a href="#">Editar</a>
-            </div>             
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Likes</p>
-                <a href="#">Editar</a>
-            </div>             
+                <a href="editor/editar-revista.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
+            </div>           
         </div> 
     </body>
 </html>

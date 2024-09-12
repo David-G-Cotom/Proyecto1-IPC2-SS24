@@ -77,5 +77,21 @@ public class RevistaDB {
         }
         return idAutor;
     }
+    
+    public boolean editarRevista(int idRevista, boolean comentarios, boolean likes, boolean suscripciones) {
+        String query = "UPDATE revista SET estado_comentarios = ?, estado_likes = ?, estado_suscripcion = ? WHERE id_revista = ?";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setBoolean(1, comentarios);
+            prepared.setBoolean(2, likes);
+            prepared.setBoolean(3, suscripciones);
+            prepared.setInt(4, idRevista);
+            prepared.execute();
+            System.out.println("Estados de la Revista Actualizada!!!");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error al Actualizar los Estados de la Revista" + e);
+            return false;
+        }
+    }
 
 }

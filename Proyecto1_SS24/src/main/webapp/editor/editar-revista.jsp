@@ -16,7 +16,8 @@
     <body>
         <div class="form-container">
             <h1>Edicion de Revista</h1>
-            <form method="POST" action="">                
+            <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionRevistaServlet">                
+                <input type="hidden" name="idRevista" value="${param.id}">
                 <div class="radio-group">
                     <div>                    
                         <label for="comentario-si"><input type="radio" id="comentario-si" name="comentarios" value="SI" checked> Recibir Comentarios</label>                    

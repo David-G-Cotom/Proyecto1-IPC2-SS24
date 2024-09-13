@@ -38,7 +38,7 @@
                         <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>">Leer</a>                   
                         <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>">Descargar</a>
                         <a href="suscriptor/nuevo-comentario.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getAttribute("idUsuario")%>">Comentar</a>                   
-                        <a href="#">Autor</a>
+                        <a href="${pageContext.servletContext.contextPath}/PerfilEditorServlet?id=<%=revista.getAutor().getIdEditor()%>">Perfil de Autor</a>
                         <%
                             if(!dataSuscripcion.revistaConLike(revista.getIdRevista(), idSuscriptor)) {
                         %>

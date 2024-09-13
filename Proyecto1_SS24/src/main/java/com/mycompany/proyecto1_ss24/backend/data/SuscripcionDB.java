@@ -107,6 +107,7 @@ public class SuscripcionDB {
         String nombreEditor = this.getNombreEditor(idUsuarioEditor);
         Editor editor = new Editor();
         editor.setNombre(nombreEditor);
+        editor.setIdEditor(idEditor);
         revista.setAutor(editor);
         return revista;
     }

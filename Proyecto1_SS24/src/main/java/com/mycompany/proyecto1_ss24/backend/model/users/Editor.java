@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Editor extends UsuarioAplicacion {
     
     private ArrayList<Revista> revistas;
+    private int idEditor;
 
     public Editor() {
     }
@@ -25,7 +26,7 @@ public class Editor extends UsuarioAplicacion {
     public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
         this.revistas = revistas;
-    }        
+    }    
 
     public ArrayList<Revista> getRevistas() {
         return revistas;
@@ -33,6 +34,14 @@ public class Editor extends UsuarioAplicacion {
 
     public void setRevistas(ArrayList<Revista> revistas) {
         this.revistas = revistas;
+    }
+
+    public int getIdEditor() {
+        return idEditor;
+    }
+
+    public void setIdEditor(int idEditor) {
+        this.idEditor = idEditor;
     }
     
     public void publicarRevista() {

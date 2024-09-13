@@ -4,7 +4,8 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
-import com.mycompany.proyecto1_ss24.backend.data.SuscriptorDB;
+import com.mycompany.proyecto1_ss24.backend.data.EditorDB;
+import com.mycompany.proyecto1_ss24.backend.model.users.Editor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Carlos Cotom
  */
-@WebServlet(name = "LikeServlet", urlPatterns = {"/LikeServlet"})
-public class LikeServlet extends HttpServlet {
+@WebServlet(name = "PerfilEditorServlet", urlPatterns = {"/PerfilEditorServlet"})
+public class PerfilEditorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +33,15 @@ public class LikeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int idUsuario = Integer.parseInt(request.getParameter("id"));
-        int idRevista = Integer.parseInt(request.getParameter("revista"));
-        SuscriptorDB dataSuscriptor = new SuscriptorDB();
-        if (!dataSuscriptor.crearLike(idUsuario, idRevista)) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>NO Se pudo dar Like a la Revista!!!</h1>");
-            }
-        }
+        int idEditor = Integer.parseInt(request.getParameter("id"));
+        EditorDB dataSuscriptor = new EditorDB();
+        Editor editor = dataSuscriptor.getEditor(idEditor);
         try (PrintWriter out = response.getWriter()) {
-            out.println("<h1>Like a la Revista hecho con Exito!!!</h1>");
+            out.println("<h1>Nombre de Editor: " + editor.getNombre() + "</h1>");
+            out.println("<h2>Hobies:" + editor.getHobbies()+ "</h2>");
+            out.println("<h2>Temas de Interes:" + editor.getTemasInteres()+ "</h2>");
+            out.println("<h2>Descripcion:" + editor.getDescripcion()+ "</h2>");
+            out.println("<h2>Gustos:" + editor.getGustos()+ "</h2>");
         }
     }
 

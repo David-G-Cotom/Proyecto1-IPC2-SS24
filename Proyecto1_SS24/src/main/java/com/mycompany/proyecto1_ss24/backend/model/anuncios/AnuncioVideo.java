@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model.anuncios;
 
-import java.time.LocalDate;
 
 /**
  *
@@ -13,13 +12,13 @@ import java.time.LocalDate;
 public class AnuncioVideo extends Anuncio {
     
     private String pathVideo;
-    
-    public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo) {
-        super(precio, vigenciaDias, isActivo);
+
+    public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+        super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
     }
 
-    public AnuncioVideo(String pathVideo, double precio, int vigenciaDias, boolean isActivo) {
-        super(precio, vigenciaDias, isActivo);
+    public AnuncioVideo(String pathVideo, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+        super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
         this.pathVideo = pathVideo;
     }
 

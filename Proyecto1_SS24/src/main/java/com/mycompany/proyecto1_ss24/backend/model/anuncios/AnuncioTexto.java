@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model.anuncios;
 
-import java.time.LocalDate;
 
 /**
  *
@@ -13,13 +12,13 @@ import java.time.LocalDate;
 public class AnuncioTexto extends Anuncio {
     
     private String contenido;
-    
-    public AnuncioTexto(double precio, int vigenciaDias, boolean isActivo) {
-        super(precio, vigenciaDias, isActivo);
+
+    public AnuncioTexto(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+        super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
     }
 
-    public AnuncioTexto(String contenido, double precio, int vigenciaDias, boolean isActivo) {
-        super(precio, vigenciaDias, isActivo);
+    public AnuncioTexto(String contenido, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+        super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
         this.contenido = contenido;
     }
 

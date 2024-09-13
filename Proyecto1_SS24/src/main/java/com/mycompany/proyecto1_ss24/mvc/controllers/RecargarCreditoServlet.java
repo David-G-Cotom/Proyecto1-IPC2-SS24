@@ -6,8 +6,7 @@ package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorCompraAnuncio;
+import com.mycompany.proyecto1_ss24.backend.model.CarteraControler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Carlos Cotom
  */
-@WebServlet(name = "CompraAnuncioServlet", urlPatterns = {"/CompraAnuncioServlet"})
-public class CompraAnuncioServlet extends HttpServlet {
+@WebServlet(name = "RecargarCreditoServlet", urlPatterns = {"/RecargarCreditoServlet"})
+public class RecargarCreditoServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -49,13 +48,13 @@ public class CompraAnuncioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        CreadorCompraAnuncio creadorCompra = new CreadorCompraAnuncio();
+        CarteraControler recargaCartera = new CarteraControler();
         try {
-            Anuncio anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
+            recargaCartera.crearRecargarCredito(request, idUsuario);
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Se Compro el Anuncio: " + anuncioCreado.toString() + "</h1>");
+                out.println("<h1>Se Realizo la Recarga Exitosamente</h1>");
             }
-        } catch (UserDataInvalidException | UserActionInvalidException e) {
+        } catch (UserDataInvalidException e) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");
             }

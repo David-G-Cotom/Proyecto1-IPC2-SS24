@@ -16,7 +16,8 @@
     <body>
         <div class="form-container">
             <h1>Recarga de Credito</h1>
-            <form method="POST" action="">
+            <form method="POST" action="${pageContext.servletContext.contextPath}/RecargarCreditoServlet">
+                <input type="hidden" name="idUsuario" value="${param.id}">
                 <div class="input-group">
                     <label for="cantidad">Cantidad a Recargar:</label>
                     <input type="text" id="cantidad" name="cantidad"/>

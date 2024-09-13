@@ -46,7 +46,7 @@ public class CreadorCompraAnuncio {
         double costoCompra = dataCompra.getCostoCompra(tipoAnuncio, duracionDias);
         double creditoInversionista = dataCompra.getCredito(idInversionista);
         if (costoCompra > creditoInversionista) {
-            throw new UserActionInvalidException("No se Puede Ejecutar la Compra, Antes Recarga Credito a tu Cartera Digital");
+            throw new UserActionInvalidException("No se Puede Ejecutar la Compra, Necesitas mas Credito para la Compra, Antes Recarga Credito a tu Cartera Digital");
         }
         int idTipoAnuncio = dataCompra.getIdTipoAnuncio(tipoAnuncio);
         int idPeriodoTiempo = dataCompra.getIdPeriodoTiempo(duracionDias);

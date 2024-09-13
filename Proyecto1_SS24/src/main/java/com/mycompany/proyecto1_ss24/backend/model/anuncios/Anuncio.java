@@ -77,6 +77,27 @@ public class Anuncio {
     public void setIdTipoAnuncio(int idTipoAnuncio) {
         this.idTipoAnuncio = idTipoAnuncio;
     }
+
+    @Override
+    public String toString() {
+        String tipoAnuncio = "";
+        switch (idTipoAnuncio) {
+            case 1:
+                tipoAnuncio = "Anuncio de Texto";
+                break;
+            case 2:
+                tipoAnuncio = "Anuncio de Texto";
+                break;
+            case 3:
+                tipoAnuncio = "Anuncio de Texto";
+                break;
+        }
+        return "Anuncio{ "
+                + "<br>precio = " + precio
+                + "<br>vigenciaDias = " + vigenciaDias
+                + "<br>isActivo = " + isActivo
+                + "<br>tipoDeAnuncio = " + tipoAnuncio + '}';
+    }
     
     public void cambiarEstado() {
         

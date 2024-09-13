@@ -24,7 +24,7 @@ public class SuscripcionDB {
 
     private final Connection connection = ConexionDB.getConnection();
 
-    private int getIdSuscriptor(int idUsuario) {
+    public int getIdSuscriptor(int idUsuario) {
         String query = "SELECT id_suscriptor FROM suscriptor WHERE usuario = ?";
         int idSuscriptor = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
@@ -57,10 +57,10 @@ public class SuscripcionDB {
                         revistas.add(revista);
                     }
                 } catch (SQLException e) {
-                    System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+                    System.out.println("Error en recibir la Revista NO Suscrita: " + e);
                 }
             } catch (SQLException e) {
-                System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+                System.out.println("Error en recibir la Revista NO Suscrita: " + e);
             }
         }
         return revistas;
@@ -234,6 +234,28 @@ public class SuscripcionDB {
         } catch (SQLException e) {
             System.out.println("Error en crear una Suscripcion: " + e);
         }
+    }
+    
+    public ArrayList<Revista> getRevistasSuscritas(int idSuscriptor) {
+        ArrayList<Integer> idsRevistasSuscritas = this.getIdRevistasSuscritas(idSuscriptor);
+        ArrayList<Revista> revistas = new ArrayList<>();
+        for (Integer idRevistaSuscrita : idsRevistasSuscritas) {
+            String query = "SELECT * FROM revista WHERE id_revista = ?";
+            try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+                prepared.setInt(1, idRevistaSuscrita);
+                try (ResultSet resul = prepared.executeQuery()) {
+                    if (resul.next()) {
+                        Revista revista = this.crearPOJORevista(resul);
+                        revistas.add(revista);
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error en recibir la Revista Suscrita: " + e);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir la Revista Suscrita: " + e);
+            }
+        }
+        return revistas;
     }
 
 }

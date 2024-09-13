@@ -27,7 +27,7 @@
             <p>Estas son tus Anuncios Registradas en el Sistema</p>
             <div>
                 <h2>Anuncio</h2>
-                <a href="#">Editar</a>
+                <a href="inversionista/editar-anuncio.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
             </div>             
             <div>
                 <h2>Anuncio</h2>

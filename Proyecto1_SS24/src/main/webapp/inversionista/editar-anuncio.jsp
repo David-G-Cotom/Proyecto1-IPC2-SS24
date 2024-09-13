@@ -16,7 +16,8 @@
     <body>
         <div class="form-container">
             <h1>Estado de Anuncio</h1>
-            <form method="POST" action="">
+            <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionAnuncioServlet">
+                <input type="hidden" name="idAnuncio" value="${param.id}">
                 <div class="radio-group">
                     <div>                    
                         <label for="estado-si"><input type="radio" id="estado-si" name="estado" value="SI" checked> Activar</label>                    

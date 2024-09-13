@@ -17,6 +17,7 @@ public class Anuncio {
     private int idInversionista;
     private int idPeriodoTiempo;
     private int idTipoAnuncio;
+    private int idAnuncio;
     
     public Anuncio() {
     }
@@ -76,6 +77,14 @@ public class Anuncio {
 
     public void setIdTipoAnuncio(int idTipoAnuncio) {
         this.idTipoAnuncio = idTipoAnuncio;
+    }
+
+    public int getIdAnuncio() {
+        return idAnuncio;
+    }
+
+    public void setIdAnuncio(int idAnuncio) {
+        this.idAnuncio = idAnuncio;
     }
 
     @Override

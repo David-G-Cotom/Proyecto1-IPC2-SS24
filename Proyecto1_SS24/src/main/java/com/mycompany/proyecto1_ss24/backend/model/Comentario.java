@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model;
 
-import com.mycompany.proyecto1_ss24.backend.model.users.Suscriptor;
 
 /**
  *
@@ -13,9 +12,13 @@ import com.mycompany.proyecto1_ss24.backend.model.users.Suscriptor;
 public class Comentario {
     
     private String contenido;
-    private Suscriptor comentarista;
+    private int comentarista;
+    private int revista;
 
-    public Comentario(String contenido, Suscriptor comentarista) {
+    public Comentario() {
+    }
+    
+    public Comentario(String contenido, int comentarista) {
         this.contenido = contenido;
         this.comentarista = comentarista;
     }
@@ -28,12 +31,20 @@ public class Comentario {
         this.contenido = contenido;
     }
 
-    public Suscriptor getComentarista() {
+    public int getComentarista() {
         return comentarista;
     }
 
-    public void setComentarista(Suscriptor comentarista) {
+    public void setComentarista(int comentarista) {
         this.comentarista = comentarista;
-    }        
+    }  
+
+    public int getRevista() {
+        return revista;
+    }
+
+    public void setRevista(int revista) {
+        this.revista = revista;
+    }
     
 }

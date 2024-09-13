@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model;
 
-import com.mycompany.proyecto1_ss24.backend.model.users.Suscriptor;
 import java.time.LocalDate;
 
 /**
@@ -13,19 +12,23 @@ import java.time.LocalDate;
  */
 public class Suscripcion {
     
-    private Suscriptor suscriptor;
+    private int suscriptor;
     private LocalDate fechaSuscripcion;
+    private int revista;
 
-    public Suscripcion(Suscriptor suscriptor, LocalDate fechaSuscripcion) {
+    public Suscripcion() {
+    }
+    
+    public Suscripcion(int suscriptor, LocalDate fechaSuscripcion) {
         this.suscriptor = suscriptor;
         this.fechaSuscripcion = fechaSuscripcion;
     }
 
-    public Suscriptor getSuscriptor() {
+    public int getSuscriptor() {
         return suscriptor;
     }
 
-    public void setSuscriptor(Suscriptor suscriptor) {
+    public void setSuscriptor(int suscriptor) {
         this.suscriptor = suscriptor;
     }
 
@@ -35,6 +38,14 @@ public class Suscripcion {
 
     public void setFechaSuscripcion(LocalDate fechaSuscripcion) {
         this.fechaSuscripcion = fechaSuscripcion;
-    }        
+    }      
+
+    public int getRevista() {
+        return revista;
+    }
+
+    public void setRevista(int revista) {
+        this.revista = revista;
+    }
     
 }

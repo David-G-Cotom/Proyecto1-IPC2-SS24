@@ -7,6 +7,7 @@ package com.mycompany.proyecto1_ss24.backend.data;
 import com.mycompany.proyecto1_ss24.backend.model.CategoriaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.EtiquetaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
+import com.mycompany.proyecto1_ss24.backend.model.Suscripcion;
 import com.mycompany.proyecto1_ss24.backend.model.users.Editor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +53,7 @@ public class SuscripcionDB {
                 prepared.setInt(1, idRevistaNoSuscrita);
                 try (ResultSet resul = prepared.executeQuery()) {
                     if (resul.next()) {
-                        Revista revista = this.crearRevista(resul);
+                        Revista revista = this.crearPOJORevista(resul);
                         revistas.add(revista);
                     }
                 } catch (SQLException e) {
@@ -92,7 +93,7 @@ public class SuscripcionDB {
         return idsRevistasNoSuscritas;
     }
 
-    private Revista crearRevista(ResultSet resul) throws SQLException {
+    private Revista crearPOJORevista(ResultSet resul) throws SQLException {
         int idRevista = resul.getInt("id_revista");
         String descripcion = resul.getString("descripcion");
         int likes = resul.getInt("likes");
@@ -219,6 +220,20 @@ public class SuscripcionDB {
             System.out.println("Error en recibir el nombre del Usuario Autor: " + e);
         }
         return nombreEditor;
+    }
+    
+    public void crearSuscripcion(Suscripcion suscripcion, int idUsuario) {
+        String query = "INSERT INTO suscripcion (revista, suscriptor, fecha_suscripcion) VALUES (?, ?, ?)";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            int idSuscriptor = this.getIdSuscriptor(idUsuario);
+            prepared.setInt(1, suscripcion.getRevista());
+            prepared.setInt(2, idSuscriptor);
+            prepared.setString(3, suscripcion.getFechaSuscripcion().toString());
+            prepared.executeUpdate();
+            System.out.println("Suscripcion Creada!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear una Suscripcion: " + e);
+        }
     }
 
 }

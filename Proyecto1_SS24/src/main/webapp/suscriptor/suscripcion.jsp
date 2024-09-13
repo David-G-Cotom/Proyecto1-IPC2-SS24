@@ -24,10 +24,8 @@
                 ArrayList<Revista> revistas = new ArrayList<>();
                 SuscripcionDB dataRevistas = new SuscripcionDB();
                 String id = (String) request.getParameter("id");
-                System.out.println(id);
                 int idUsuario = Integer.parseInt(id);
                 revistas = dataRevistas.getRevistasNoSuscritas(idUsuario);
-                System.out.println(revistas);
                 for(Revista revista : revistas) {
             %>
                 <div>
@@ -37,7 +35,7 @@
                     <p>Etiquetas: <%=revista.getEtiquetas()%></p>
                     <p>Nombre del Autor: <%=revista.getAutor().getNombre()%></p>
                     <p>Likes: <%=revista.getLikes()%></p>
-                    <a href="editor/editar-revista.jsp?id=<%=revista.getIdRevista()%>" target="_blank">Suscribir</a>
+                    <a href="nueva-suscripcion.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getParameter("id")%>" target="_blank">Suscribir</a>
                 </div>
             <%
                 }

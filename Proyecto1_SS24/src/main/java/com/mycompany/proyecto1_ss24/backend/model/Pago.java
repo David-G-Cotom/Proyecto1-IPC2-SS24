@@ -14,10 +14,15 @@ public class Pago {
     
     private double cantidadPaog;
     private LocalDate fechaPago;
+    private int idInversionista;
 
-    public Pago(double cantidadPaog, LocalDate fechaPago) {
+    public Pago() {
+    }
+
+    public Pago(double cantidadPaog, LocalDate fechaPago, int idInversionista) {
         this.cantidadPaog = cantidadPaog;
         this.fechaPago = fechaPago;
+        this.idInversionista = idInversionista;
     }
 
     public double getCantidadPaog() {
@@ -35,5 +40,13 @@ public class Pago {
     public void setFechaPago(LocalDate fechaPago) {
         this.fechaPago = fechaPago;
     }        
+
+    public int getIdInversionista() {
+        return idInversionista;
+    }
+
+    public void setIdInversionista(int idInversionista) {
+        this.idInversionista = idInversionista;
+    }
     
 }

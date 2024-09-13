@@ -16,7 +16,8 @@
     <body>
         <div class="form-container">
             <h1>Compra de Anuncio</h1>
-            <form method="POST" action="">
+            <form method="POST" action="${pageContext.servletContext.contextPath}/CompraAnuncioServlet">
+                <input type="hidden" name="idUsuario" value="${param.id}">
                 <div class="input-group">
                     <label for="fecha">Fecha de Compra:</label>
                     <input type="date" id="fecha" name="fecha"/>
@@ -24,9 +25,9 @@
                 <div class="input-group">
                     <label for="tipoanuncio">Tipo de Anuncio:</label>
                     <select id="tipoanuncio" name="tipoanuncio">
-                        <option value="ANUNCIO DE TEXTO">ANUNCIO DE TEXTO</option>
-                        <option value="ANUNCIO DE TEXTO E IMAGEN">ANUNCIO DE TEXTO E IMAGEN</option>
-                        <option value="ANUNCIO DE VIDEO">ANUNCIO DE VIDEO</option>               
+                        <option value="ANUNCIO_TEXTO">ANUNCIO DE TEXTO</option>
+                        <option value="ANUNCIO_TEXTO_IMAGEN">ANUNCIO DE TEXTO E IMAGEN</option>
+                        <option value="ANUNCIO_VIDEO">ANUNCIO DE VIDEO</option>               
                     </select>
                 </div>
                 <div class="input-group">

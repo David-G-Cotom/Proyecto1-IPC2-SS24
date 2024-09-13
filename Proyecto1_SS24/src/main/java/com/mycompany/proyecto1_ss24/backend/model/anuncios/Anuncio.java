@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model.anuncios;
 
-import java.time.LocalDate;
 
 /**
  *
@@ -15,13 +14,20 @@ public class Anuncio {
     private double precio;
     private int vigenciaDias;
     private boolean isActivo;
-    private LocalDate fechaCompra;
+    private int idInversionista;
+    private int idPeriodoTiempo;
+    private int idTipoAnuncio;
+    
+    public Anuncio() {
+    }
 
-    public Anuncio(double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
+    public Anuncio(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         this.precio = precio;
         this.vigenciaDias = vigenciaDias;
         this.isActivo = isActivo;
-        this.fechaCompra = fechaCompra;
+        this.idInversionista = idInversionista;
+        this.idPeriodoTiempo = idPeriodoTiempo;
+        this.idTipoAnuncio = idTipoAnuncio;
     }
 
     public double getPrecio() {
@@ -48,12 +54,28 @@ public class Anuncio {
         this.isActivo = isActivo;
     }
 
-    public LocalDate getFechaCompra() {
-        return fechaCompra;
+    public int getIdInversionista() {
+        return idInversionista;
     }
 
-    public void setFechaCompra(LocalDate fechaCompra) {
-        this.fechaCompra = fechaCompra;
+    public void setIdInversionista(int idInversionista) {
+        this.idInversionista = idInversionista;
+    }
+
+    public int getIdPeriodoTiempo() {
+        return idPeriodoTiempo;
+    }
+
+    public void setIdPeriodoTiempo(int idPeriodoTiempo) {
+        this.idPeriodoTiempo = idPeriodoTiempo;
+    }
+
+    public int getIdTipoAnuncio() {
+        return idTipoAnuncio;
+    }
+
+    public void setIdTipoAnuncio(int idTipoAnuncio) {
+        this.idTipoAnuncio = idTipoAnuncio;
     }
     
     public void cambiarEstado() {

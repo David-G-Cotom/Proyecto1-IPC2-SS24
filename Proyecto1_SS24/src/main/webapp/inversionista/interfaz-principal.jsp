@@ -17,7 +17,7 @@
         <div class="sidebar">
             <h2>Menú</h2>
             <ul>
-                <li><a href="#">Comprar Anuncio</a></li>
+                <li><a href="inversionista/comprar-anuncio.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio</a></li>
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Recargar Credito</a></li>
             </ul>

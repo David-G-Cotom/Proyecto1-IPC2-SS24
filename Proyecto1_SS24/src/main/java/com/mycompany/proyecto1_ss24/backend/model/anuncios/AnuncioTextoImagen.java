@@ -15,11 +15,11 @@ public class AnuncioTextoImagen extends Anuncio {
     private String contenido;
     private String pathImage;
 
-    public AnuncioTextoImagen(double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioTextoImagen(double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
     }
-    public AnuncioTextoImagen(String contenido, String pathImage, double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioTextoImagen(String contenido, String pathImage, double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
         this.contenido = contenido;
         this.pathImage = pathImage;
     }

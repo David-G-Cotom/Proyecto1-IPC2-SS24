@@ -14,12 +14,12 @@ public class AnuncioVideo extends Anuncio {
     
     private String pathVideo;
     
-    public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
     }
 
-    public AnuncioVideo(String pathVideo, double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioVideo(String pathVideo, double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
         this.pathVideo = pathVideo;
     }
 

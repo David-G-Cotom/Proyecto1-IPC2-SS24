@@ -14,12 +14,12 @@ public class AnuncioTexto extends Anuncio {
     
     private String contenido;
     
-    public AnuncioTexto(double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioTexto(double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
     }
 
-    public AnuncioTexto(String contenido, double precio, int vigenciaDias, boolean isActivo, LocalDate fechaCompra) {
-        super(precio, vigenciaDias, isActivo, fechaCompra);
+    public AnuncioTexto(String contenido, double precio, int vigenciaDias, boolean isActivo) {
+        super(precio, vigenciaDias, isActivo);
         this.contenido = contenido;
     }
 

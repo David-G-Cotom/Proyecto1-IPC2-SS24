@@ -95,10 +95,10 @@ public class Anuncio {
                 tipoAnuncio = "Anuncio de Texto";
                 break;
             case 2:
-                tipoAnuncio = "Anuncio de Texto";
+                tipoAnuncio = "Anuncio de Texto e Imagen";
                 break;
             case 3:
-                tipoAnuncio = "Anuncio de Texto";
+                tipoAnuncio = "Anuncio de Video";
                 break;
         }
         return "Anuncio{ "

@@ -4,6 +4,10 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.AnuncioDB" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,30 +29,33 @@
         <div class="content">
             <h1>Bienvenido Inversionista: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>
             <p>Estas son tus Anuncios Registradas en el Sistema</p>
+            <%
+                ArrayList<Anuncio> anuncios = new ArrayList<>();
+                AnuncioDB dataAnuncios = new AnuncioDB();
+                UsuarioAplicacion usuario = (UsuarioAplicacion) request.getAttribute("usuarioLogeado");
+                int idInversionista = dataAnuncios.getIdInversionista(usuario.getIdUsuario());
+                anuncios = dataAnuncios.getAnuncios(idInversionista);
+                for(Anuncio anuncio : anuncios) {
+                    String tipoAnuncio = "";
+                    switch (anuncio.getIdTipoAnuncio()) {
+                        case 1: tipoAnuncio = "Anuncio de Texto";
+                            break;
+                        case 2: tipoAnuncio = "Anuncio de Texto e Imagen";
+                            break;
+                        case 3: tipoAnuncio = "Anuncio de Video";
+                            break;
+                    }
+            %>
             <div>
-                <h2>Anuncio</h2>
-                <a href="inversionista/editar-anuncio.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
-            </div>             
-            <div>
-                <h2>Anuncio</h2>
-                <a href="#">Editar</a>
-            </div>             
-            <div>
-                <h2>Anuncio</h2>
-                <a href="#">Editar</a>
-            </div>             
-            <div>
-                <h2>Anuncio</h2>
-                <a href="#">Editar</a>
-            </div>             
-            <div>
-                <h2>Anuncio</h2>
-                <a href="#">Editar</a>
-            </div>             
-            <div>
-                <h2>Anuncio</h2>
-                <a href="#">Editar</a>
-            </div>            
+                <h2>Tipo de Anuncio: <%=tipoAnuncio%></h2>
+                <p>Vigencia en Dias: <%=anuncio.getVigenciaDias()%></p>
+                <p>Esta Activo: <%=anuncio.isIsActivo()%></p>
+                <p>Costo: <%=anuncio.getPrecio()%></p>
+                <a href="inversionista/editar-anuncio.jsp?id=<%=anuncio.getIdAnuncio()%>">Editar</a>
+            </div>
+            <%
+                }
+            %>            
         </div> 
     </body>
 </html>

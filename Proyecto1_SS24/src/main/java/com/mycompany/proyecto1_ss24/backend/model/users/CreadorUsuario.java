@@ -59,7 +59,7 @@ public class CreadorUsuario {
         if (usuario.getNombre().equals("")) {
             throw new UserDataInvalidException("Debe Completar el Campo para el Nombre");
         }
-        if (usuario.getFoto() == null) {
+        if (fileName.equals("")) {
             throw new UserDataInvalidException("Debe Seleccionar una Imagen para su Perfil");
         }
         if (!this.extensCorrect(fileName)) {

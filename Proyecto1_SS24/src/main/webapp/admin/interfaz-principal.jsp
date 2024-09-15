@@ -20,7 +20,7 @@
                 <li><a href="#editar-precio-tipo-anuncio">Editar Precios de Tipo de Anuncio</a></li>
                 <li><a href="#editar-precio-tiempo-anuncios">Editar Precios de Periodos de Tiempo para Anuncios</a></li>
                 <li><a href="#editar-precio-revista">Editar Precios de Revistas</a></li>
-                <li><a href="perfil/perfil-usuarios.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Perfil</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}/PerfilServlet?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Perfil</a></li>
                 <li><a href="#">Reporte de Ganancias</a></li>
                 <li><a href="#">Reporte de Anuncios Comprados</a></li>
                 <li><a href="#">Reporte de las Revistas mas Populares</a></li>

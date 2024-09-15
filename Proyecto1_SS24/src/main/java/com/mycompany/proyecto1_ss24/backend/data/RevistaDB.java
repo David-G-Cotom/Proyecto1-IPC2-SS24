@@ -88,7 +88,7 @@ public class RevistaDB {
             prepared.setBoolean(2, likes);
             prepared.setBoolean(3, suscripciones);
             prepared.setInt(4, idRevista);
-            prepared.execute();
+            prepared.executeUpdate();
             System.out.println("Estados de la Revista Actualizada!!!");
             return true;
         } catch (SQLException e) {
@@ -238,10 +238,10 @@ public class RevistaDB {
                     dataPdf = resul.getBytes("archivo_pdf");
                 }
             } catch (SQLException e) {
-                System.out.println("Error en recibir el COntenido de la Revista PDF: " + e);
+                System.out.println("Error en recibir el Contenido de la Revista PDF: " + e);
             }
         } catch (SQLException e) {
-            System.out.println("Error en recibir el COntenido de la Revista PDF: " + e);
+            System.out.println("Error en recibir el Contenido de la Revista PDF: " + e);
         }
         return dataPdf;
     }

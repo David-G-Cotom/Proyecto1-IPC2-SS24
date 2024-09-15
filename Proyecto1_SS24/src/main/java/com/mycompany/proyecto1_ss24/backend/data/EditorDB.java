@@ -26,6 +26,7 @@ public class EditorDB {
             prepared.setInt(1, idUsuarioEditor);
             try (ResultSet resul = prepared.executeQuery()) {
                 if (resul.next()) {
+                    editor.setIdUsuario(idUsuarioEditor);
                     editor.setHobbies(resul.getString("hobbie"));
                     editor.setTemasInteres(resul.getString("temas_interes"));
                     editor.setDescripcion(resul.getString("descripcion"));

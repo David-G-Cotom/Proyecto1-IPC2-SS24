@@ -36,13 +36,8 @@ public class PerfilEditorServlet extends HttpServlet {
         int idEditor = Integer.parseInt(request.getParameter("id"));
         EditorDB dataSuscriptor = new EditorDB();
         Editor editor = dataSuscriptor.getEditor(idEditor);
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<h1>Nombre de Editor: " + editor.getNombre() + "</h1>");
-            out.println("<h2>Hobies:" + editor.getHobbies()+ "</h2>");
-            out.println("<h2>Temas de Interes:" + editor.getTemasInteres()+ "</h2>");
-            out.println("<h2>Descripcion:" + editor.getDescripcion()+ "</h2>");
-            out.println("<h2>Gustos:" + editor.getGustos()+ "</h2>");
-        }
+        request.setAttribute("autorRevista", editor);
+        request.getRequestDispatcher("/perfil/perfil-editor.jsp").forward(request, response);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

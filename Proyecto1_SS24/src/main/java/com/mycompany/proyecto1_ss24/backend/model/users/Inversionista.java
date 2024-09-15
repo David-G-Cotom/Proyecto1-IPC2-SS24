@@ -6,6 +6,7 @@ package com.mycompany.proyecto1_ss24.backend.model.users;
 
 import com.mycompany.proyecto1_ss24.backend.model.Pago;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -18,11 +19,11 @@ public class Inversionista extends UsuarioAplicacion {
     private ArrayList<Anuncio> anunciosComprados;
     private ArrayList<Pago> pagosHechos;
 
-    public Inversionista(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+    public Inversionista(InputStream pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
     }
 
-    public Inversionista(double credito, ArrayList<Anuncio> anunciosComprados, ArrayList<Pago> pagosHechos, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+    public Inversionista(double credito, ArrayList<Anuncio> anunciosComprados, ArrayList<Pago> pagosHechos, InputStream pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
         this.credito = credito;
         this.anunciosComprados = anunciosComprados;

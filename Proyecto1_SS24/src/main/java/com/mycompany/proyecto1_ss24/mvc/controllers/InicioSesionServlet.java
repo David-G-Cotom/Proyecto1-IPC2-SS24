@@ -68,7 +68,7 @@ public class InicioSesionServlet extends HttpServlet {
     
     private void redireccionarRespones(HttpServletRequest request, HttpServletResponse response, UsuarioAplicacion usuario)
             throws ServletException, IOException {
-        switch (usuario.getTipoUsuario()) {
+        switch (usuario.getIdTipoUsuario()) {
             case 1://editor
                 request.getRequestDispatcher("/editor/interfaz-principal.jsp").forward(request, response);
                 break;

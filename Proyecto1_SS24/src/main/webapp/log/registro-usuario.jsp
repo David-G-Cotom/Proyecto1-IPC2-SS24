@@ -16,7 +16,7 @@
     <body>
         <div class="login-container">
             <h2>Registrar Usuario</h2>
-            <form id="loginForm" method="POST" action="${pageContext.servletContext.contextPath}/RegistroUsuarioServlet">
+            <form id="loginForm" method="POST" action="${pageContext.servletContext.contextPath}/RegistroUsuarioServlet" enctype="multipart/form-data">
                 <div class="input-group">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required>
@@ -37,6 +37,10 @@
                 <div class="input-group">
                     <label for="name">Nombre</label>
                     <input type="text" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="imageFile">Foto de Perfil</label>                    
+                    <input type="file" data-buttonText="Foto" name="imageFile" id="imageFile">                        
                 </div>
                 <button type="submit">Registrar</button>
             </form>

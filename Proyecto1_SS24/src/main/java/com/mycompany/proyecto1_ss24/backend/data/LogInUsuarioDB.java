@@ -5,6 +5,7 @@
 package com.mycompany.proyecto1_ss24.backend.data;
 
 import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,14 +28,14 @@ public class LogInUsuarioDB {
             try (ResultSet resul = prepared.executeQuery()) {
                 if (resul.next()) {
                     int idUsuario = resul.getInt("id_usuario");
-                    String pathPhoto = resul.getString("foto");
+                    InputStream foto = resul.getBinaryStream("foto");
                     String hobbies = resul.getString("hobbie");
                     String temasInteres = resul.getString("temas_interes");
                     String descripcion = resul.getString("descripcion");
                     String gustos = resul.getString("gustos");
                     int tipoUsuairo = resul.getInt("tipo_usuario");
                     String nombre = resul.getString("nombre");
-                    usuario = new UsuarioAplicacion(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo, nombre, idUsuario);                    
+                    usuario = new UsuarioAplicacion(foto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuairo, nombre, idUsuario);                    
                 }
             } catch (SQLException e) {
                 System.out.println("Error en recibir usuario: " + e);
@@ -45,7 +46,7 @@ public class LogInUsuarioDB {
         return usuario;
     }
     
-    public int getTipoUsuario(String tipoUsuario) {
+    public int getIdTipoUsuario(String tipoUsuario) {
         String query = "SELECT id_tipo FROM tipo_usuario WHERE tipo = ?";
         int idTipo = 0;
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
@@ -63,27 +64,25 @@ public class LogInUsuarioDB {
         return idTipo;
     }
     
-    public UsuarioAplicacion crearUsuario(String userName, String password, int tipoUsuario, String nombre) {
-        String query = "INSERT INTO usuario (tipo_usuario, user_name, user_password, nombre) VALUES (?, ?, ?, ?)";
-        UsuarioAplicacion usuario = null;
+    public void crearUsuario(UsuarioAplicacion usuario) {
+        String query = "INSERT INTO usuario (foto, tipo_usuario, user_name, user_password, nombre) VALUES (?, ?, ?, ?, ?)";        
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
-            prepared.setInt(1, tipoUsuario);
-            prepared.setString(2, userName);
-            prepared.setString(3, password);
-            prepared.setString(4, nombre);
+            prepared.setBlob(1, usuario.getFoto());
+            prepared.setInt(2, usuario.getIdTipoUsuario());
+            prepared.setString(3, usuario.getUserName());
+            prepared.setString(4, usuario.getPassword());
+            prepared.setString(5, usuario.getNombre());
             prepared.executeUpdate();
-            usuario = new UsuarioAplicacion(userName, password, tipoUsuario, nombre);
             System.out.println("Nuevo Usuario Creado");
         } catch (SQLException e) {
             System.out.println("Error en crear un Usuario: " + e);
         }
-        this.crearTipoUsuario(usuario);        
-        return usuario;
+        this.crearTipoUsuario(usuario);
     }
     
     private void crearTipoUsuario(UsuarioAplicacion usuario) {
         int idUsuario = this.getIdUsuario(usuario);
-        switch (usuario.getTipoUsuario()) {
+        switch (usuario.getIdTipoUsuario()) {
             case 1://editor
                 this.crearEditor(idUsuario);
                 break;

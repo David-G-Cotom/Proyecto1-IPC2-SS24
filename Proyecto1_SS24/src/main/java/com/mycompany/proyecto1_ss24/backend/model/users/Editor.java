@@ -5,6 +5,7 @@
 package com.mycompany.proyecto1_ss24.backend.model.users;
 
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +20,11 @@ public class Editor extends UsuarioAplicacion {
     public Editor() {
     }
     
-    public Editor(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+    public Editor(InputStream pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
     }
 
-    public Editor(ArrayList<Revista> revistas, String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+    public Editor(ArrayList<Revista> revistas, InputStream pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
         this.revistas = revistas;
     }    

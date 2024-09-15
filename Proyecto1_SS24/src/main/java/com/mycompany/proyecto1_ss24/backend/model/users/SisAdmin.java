@@ -6,6 +6,7 @@ package com.mycompany.proyecto1_ss24.backend.model.users;
 
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
+import java.io.InputStream;
 
 /**
  *
@@ -13,7 +14,7 @@ import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
  */
 public class SisAdmin extends UsuarioAplicacion {
 
-    public SisAdmin(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+    public SisAdmin(InputStream pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         super(pathPhoto, hobbies, temasInteres, descripcion, gustos, userName, password, tipoUsuario, nombre, idUsuario);
     }
     

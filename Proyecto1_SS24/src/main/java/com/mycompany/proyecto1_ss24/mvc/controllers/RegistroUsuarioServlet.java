@@ -5,9 +5,13 @@
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.data.LogInUsuarioDB;
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
+import com.mycompany.proyecto1_ss24.backend.model.users.CreadorUsuario;
 import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +23,7 @@ import java.io.PrintWriter;
  * @author Carlos Cotom
  */
 @WebServlet(name = "RegistroUsuarioServlet", urlPatterns = {"/RegistroUsuarioServlet"})
+@MultipartConfig
 public class RegistroUsuarioServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -32,7 +37,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
+            throws ServletException, IOException {
     }
 
     /**
@@ -46,41 +51,24 @@ public class RegistroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        String tipoUsuario = request.getParameter("usertype");
-        String nombre = request.getParameter("name");
-        if (userName.equals("") || password.equals("") || nombre.equals("")) {
+        CreadorUsuario creadorUsuario = new CreadorUsuario();         
+        try {
+            UsuarioAplicacion usuario = creadorUsuario.crearUsuario(request);
+            LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
+            int idUsuario = dataUsuario.getIdUsuario(usuario);
+            usuario.setIdUsuario(idUsuario);
+            request.setAttribute("usuarioLogeado", usuario);
+            redireccionarRespones(request, response, usuario);
+        } catch (UserDataInvalidException | UserActionInvalidException ex) {
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>ERROR!!! DEBE COMPLETRA TODOS LOS CAMPOS DEL FORMULARIO</h1>");
+                out.println("<h1>ERROR!!! " + ex.getMessage() + "</h1>");
             }
-            return;
         }
-        LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
-        UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
-        if (usuario != null) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>USUARIO YA EXISTENTE</h1>");
-            }
-            return;
-        }
-        int idTipoUsuario = dataUsuario.getTipoUsuario(tipoUsuario);
-        usuario = dataUsuario.crearUsuario(userName, password, idTipoUsuario, nombre);
-        if (usuario == null) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>ERROR AL REGISTRAR USUARIO</h1>");
-            }
-            return;
-        }
-        int idUsuario = dataUsuario.getIdUsuario(usuario);
-        usuario.setIdUsuario(idUsuario);
-        request.setAttribute("usuarioLogeado", usuario);
-        redireccionarRespones(request, response, usuario);
     }
-    
+
     private void redireccionarRespones(HttpServletRequest request, HttpServletResponse response, UsuarioAplicacion usuario)
             throws ServletException, IOException {
-        switch (usuario.getTipoUsuario()) {
+        switch (usuario.getIdTipoUsuario()) {
             case 1://editor
                 request.getRequestDispatcher("/editor/interfaz-principal.jsp").forward(request, response);
                 break;

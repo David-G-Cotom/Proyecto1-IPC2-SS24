@@ -4,35 +4,37 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model.users;
 
+import java.io.InputStream;
+
 /**
  *
  * @author Carlos Cotom
  */
 public class UsuarioAplicacion {
     
-    private String pathPhoto;
+    private InputStream foto;
     private String hobbies;
     private String temasInteres;
     private String descripcion;
     private String gustos;
     private String userName;
     private String password;
-    private int tipoUsuario;
+    private int idTipoUsuario;
     private String nombre;
     private int idUsuario;
 
     public UsuarioAplicacion() {
     }
     
-    public UsuarioAplicacion(String pathPhoto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
-        this.pathPhoto = pathPhoto;
+    public UsuarioAplicacion(InputStream foto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
+        this.foto = foto;
         this.hobbies = hobbies;
         this.temasInteres = temasInteres;
         this.descripcion = descripcion;
         this.gustos = gustos;
         this.userName = userName;
         this.password = password;
-        this.tipoUsuario = tipoUsuario;
+        this.idTipoUsuario = tipoUsuario;
         this.nombre = nombre;
         this.idUsuario = idUsuario;
     }
@@ -40,16 +42,16 @@ public class UsuarioAplicacion {
     public UsuarioAplicacion(String userName, String password, int tipoUsuario, String nombre) {
         this.userName = userName;
         this.password = password;
-        this.tipoUsuario = tipoUsuario;
+        this.idTipoUsuario = tipoUsuario;
         this.nombre = nombre;
     }        
 
-    public String getPathPhoto() {
-        return pathPhoto;
+    public InputStream getFoto() {
+        return foto;
     }
 
-    public void setPathPhoto(String pathPhoto) {
-        this.pathPhoto = pathPhoto;
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
     }
 
     public String getHobbies() {
@@ -108,12 +110,12 @@ public class UsuarioAplicacion {
         this.password = password;
     } 
 
-    public int getTipoUsuario() {
-        return tipoUsuario;
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
     }
 
-    public void setTipoUsuario(int tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
 
     public String getNombre() {

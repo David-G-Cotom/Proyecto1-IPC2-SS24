@@ -245,5 +245,36 @@ public class RevistaDB {
         }
         return dataPdf;
     }
+    
+    public void actualizarLikes(int idRevista) {
+        String query = "UPDATE revista SET likes = ? WHERE id_revista = ?";
+        int likes = this.getLikes(idRevista);
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, likes);
+            prepared.setInt(2, idRevista);
+            prepared.executeUpdate();
+            System.out.println("Likes Actualizados de la Revista");
+        } catch (SQLException e) {
+            System.out.println("Error al Actualizar los Likes de la Revista: " + e);
+        }
+    }
+    
+    private int getLikes(int idRevista) {
+        String query = "SELECT * FROM likes WHERE revista = ?";
+        int cantidadLikes = 0;
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idRevista);
+            try (ResultSet resul = prepared.executeQuery()) {
+                while (resul.next()) {
+                    cantidadLikes++;
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir la CAntidad de Likes de una Revista: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir la CAntidad de Likes de una Revista: " + e);
+        }
+        return cantidadLikes;
+    }
 
 }

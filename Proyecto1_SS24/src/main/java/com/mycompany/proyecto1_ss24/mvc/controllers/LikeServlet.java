@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.data.RevistaDB;
 import com.mycompany.proyecto1_ss24.backend.data.SuscriptorDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +41,8 @@ public class LikeServlet extends HttpServlet {
                 out.println("<h1>NO Se pudo dar Like a la Revista!!!</h1>");
             }
         }
+        RevistaDB dataRevista = new RevistaDB();
+        dataRevista.actualizarLikes(idRevista);
         try (PrintWriter out = response.getWriter()) {
             out.println("<h1>Like a la Revista hecho con Exito!!!</h1>");
         }

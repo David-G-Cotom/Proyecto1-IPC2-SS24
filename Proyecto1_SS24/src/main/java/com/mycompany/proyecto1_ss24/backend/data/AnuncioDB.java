@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -75,6 +76,38 @@ public class AnuncioDB {
             System.out.println("Error en recibir los Anuncios de un Inversionista: " + e);
         }
         return anuncios;
+    }
+    
+    public double[] getPreciosTipoAnuncios() {
+        String query = "SELECT precio FROM tipo_anuncio";
+        double[] precios = new double[3];   //PORQUE SON 3 TIPOS DE ANUNCIOS
+        int i = 0;
+        try (Statement state = this.connection.createStatement();
+                ResultSet resul = state.executeQuery(query)) {
+            while (resul.next()) {
+                precios[i] = resul.getDouble("precio");
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al Consulta los Precios de los Diferentes Tipos de Anuncios: " + e);
+        }
+        return precios;
+    }
+    
+    public double[] getPreciosPeriodoTiempo() {
+        String query = "SELECT precio FROM periodo_tiempos";
+        double[] precios = new double[4];   //PORQUE SON 4 PERIODOS DE TIEMPO
+        int i = 0;
+        try (Statement state = this.connection.createStatement();
+                ResultSet resul = state.executeQuery(query)) {
+            while (resul.next()) {
+                precios[i] = resul.getDouble("precio");
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al Consulta los Precios de los Diferentes Periodos de Tiempo: " + e);
+        }
+        return precios;
     }
     
 }

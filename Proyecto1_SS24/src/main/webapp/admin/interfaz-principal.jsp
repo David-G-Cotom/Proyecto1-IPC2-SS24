@@ -4,6 +4,7 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.AnuncioDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,53 +30,57 @@
         </div>
         <div class="content">
             <h1>Bienvenido Administrador de Sistema: ${sessionScope.usuarioLogeado} ${usuarioLogeado.getNombre()}</h1>   
-
             <div id="editar-precio-tipo-anuncio">
                 <h2>Edicion de Precios para los Tipos de Anuncios</h2>
                 <div class="form-container">
                     <form method="POST" action="">
+                        <%
+                            AnuncioDB dataAnuncio = new AnuncioDB();
+                            double[] preciosTipoAnuncio = dataAnuncio.getPreciosTipoAnuncios();
+                        %>
                         <div class="input-group">
                             <label for="precio-texto">Precio para el Anuncio de Texto:</label>
-                            <input type="text" id="precio-texto" name="precio-texto" value=""/>
+                            <input type="text" id="precio-texto" name="precio-texto" value="<%=preciosTipoAnuncio[0]%>"/>
                         </div>
                         <div class="input-group">
                             <label for="precio-texto-imagen">Precio para el Anuncio de Texto e Imagen:</label>
-                            <input type="text" id="precio-texto-imagen" name="precio-texto-imagen" value=""/>
+                            <input type="text" id="precio-texto-imagen" name="precio-texto-imagen" value="<%=preciosTipoAnuncio[1]%>"/>
                         </div>
                         <div class="input-group">
                             <label for="precio-video">Precio para el Anuncio de Video</label>
-                            <input type="text" id="precio-video" name="precio-video" value=""/>
+                            <input type="text" id="precio-video" name="precio-video" value="<%=preciosTipoAnuncio[2]%>"/>
                         </div>
                         <button type="submit">Guardar</button>
                     </form>
                 </div>
             </div>
-
             <div id="editar-precio-tiempo-anuncios">
                 <h2>Edicion de Precios para los Periodos de Tiempos en los Anuncios</h2>
                 <div class="form-container">
                     <form method="POST" action="">
+                        <%
+                            double[] preciosPeriodosTiempo = dataAnuncio.getPreciosPeriodoTiempo();
+                        %>
                         <div class="input-group">
                             <label for="precio-1">Precio para 1 dia:</label>
-                            <input type="text" id="precio-1" name="precio-1" value=""/>
+                            <input type="text" id="precio-1" name="precio-1" value="<%=preciosPeriodosTiempo[0]%>"/>
                         </div>
                         <div class="input-group">
                             <label for="precio-3">Precio para 3 dias:</label>
-                            <input type="text" id="precio-3" name="precio-3" value=""/>
+                            <input type="text" id="precio-3" name="precio-3" value="<%=preciosPeriodosTiempo[1]%>"/>
                         </div>
                         <div class="input-group">
                             <label for="precio-7">Precio para 7 dias</label>
-                            <input type="text" id="precio-7" name="precio-7" value=""/>
+                            <input type="text" id="precio-7" name="precio-7" value="<%=preciosPeriodosTiempo[2]%>"/>
                         </div>
                         <div class="input-group">
                             <label for="precio-14">Precio para 14 dias</label>
-                            <input type="text" id="precio-14" name="precio-14" value=""/>
+                            <input type="text" id="precio-14" name="precio-14" value="<%=preciosPeriodosTiempo[3]%>"/>
                         </div>
                         <button type="submit">Guardar</button>
                     </form>
                 </div>
             </div>
-
             <div id="editar-precio-revista">
                 <h2>Edicion de Precios para las Revistas</h2>
                 <div class="content-revistas">

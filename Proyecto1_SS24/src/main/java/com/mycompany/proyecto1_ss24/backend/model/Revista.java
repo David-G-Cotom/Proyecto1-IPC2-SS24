@@ -24,7 +24,7 @@ public class Revista {
     private Editor autor;
     private int likes;
     private ArrayList<Comentario> comentarios;
-    private int costo;
+    private double costo;
     private LocalDate fechaCreacion;
     private ArrayList<Suscripcion> suscripciones;
     private String nombreRevista;
@@ -35,7 +35,7 @@ public class Revista {
     public Revista() {
     }
     
-    public Revista(boolean puedeComentarse, boolean puedeTenerLikes, boolean puedeSuscribirse, String descripcion, CategoriaEnum categoria, ArrayList<EtiquetaEnum> etiquetas, Editor autor, int likes, ArrayList<Comentario> comentarios, int costo, LocalDate fechaCreacion, ArrayList<Suscripcion> suscripciones, String nombreRevista, InputStream archivoPDF, byte[] bytesArchivo) {
+    public Revista(boolean puedeComentarse, boolean puedeTenerLikes, boolean puedeSuscribirse, String descripcion, CategoriaEnum categoria, ArrayList<EtiquetaEnum> etiquetas, Editor autor, int likes, ArrayList<Comentario> comentarios, double costo, LocalDate fechaCreacion, ArrayList<Suscripcion> suscripciones, String nombreRevista, InputStream archivoPDF, byte[] bytesArchivo) {
         this.puedeComentarse = puedeComentarse;
         this.puedeTenerLikes = puedeTenerLikes;
         this.puedeSuscribirse = puedeSuscribirse;
@@ -134,11 +134,11 @@ public class Revista {
         this.comentarios = comentarios;
     }
 
-    public int getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 

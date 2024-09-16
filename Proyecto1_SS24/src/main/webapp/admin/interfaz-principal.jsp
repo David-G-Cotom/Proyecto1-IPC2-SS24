@@ -4,6 +4,9 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.PreciosRevistaDB" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.data.AnuncioDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -82,27 +85,30 @@
                 </div>
             </div>
             <div id="editar-precio-revista">
-                <h2>Edicion de Precios para las Revistas</h2>
+                <h2>Edicion de Precios por Dia para las Revistas</h2>
+                <p>Estas son las Revistas Registradas en el Sistema</p>
                 <div class="content-revistas">
-                    <p>Estas son las Revistas Registradas en el Sistema</p>
+                    <%
+                        ArrayList<Revista> revistas = new ArrayList<>();
+                        PreciosRevistaDB dataRevistas = new PreciosRevistaDB();
+                        revistas = dataRevistas.getAllRevistas();
+                        for(Revista revista : revistas) {
+                    %>
                     <div>
-                        <h3>Revista</h3>
-                        <p>Descripcion de Revista</p>
-                        <div class="input-group">
-                            <label for="precio-rev1">Precio Actual</label>
-                            <input type="text" id="precio-rev1" name="precio-rev1" value=""/>
-                        </div>
-                        <button type="submit">Cambiar</button>
-                    </div>            
-                    <div>
-                        <h3>Revista</h3>
-                        <p>Descripcion de Revista</p>
-                        <div class="input-group">
-                            <label for="precio-rev2">Precio Actual</label>
-                            <input type="text" id="precio-rev2" name="precio-rev2" value=""/>
-                        </div>
-                        <button type="submit">Cambiar</button>
-                    </div>
+                        <h3>Nombre de Revista: <%=revista.getNombreRevista()%></h3>
+                        <p>Descripcion de Revista: <%=revista.getDescripcion()%></p>
+                        <p>Likes: <%=revista.getLikes()%></p>
+                        <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionPrecioAnuncioServlet?id=<%=revista.getIdRevista()%>">
+                            <div class="input-group">
+                                <label for="precio-rev1">Precio por Dia Actual: </label>
+                                <input type="text" id="precio-rev1" name="precio-rev1" value="<%=revista.getCosto()%>"/>
+                                <button type="submit">Cambiar</button>
+                            </div>
+                        </form>
+                    </div>                    
+                    <%    
+                        }
+                    %>
                 </div>
             </div>
         </div> 

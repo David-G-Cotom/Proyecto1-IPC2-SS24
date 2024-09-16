@@ -33,7 +33,7 @@
             <div id="editar-precio-tipo-anuncio">
                 <h2>Edicion de Precios para los Tipos de Anuncios</h2>
                 <div class="form-container">
-                    <form method="POST" action="">
+                    <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionPrecioTipoAnuncioServlet">
                         <%
                             AnuncioDB dataAnuncio = new AnuncioDB();
                             double[] preciosTipoAnuncio = dataAnuncio.getPreciosTipoAnuncios();
@@ -57,7 +57,7 @@
             <div id="editar-precio-tiempo-anuncios">
                 <h2>Edicion de Precios para los Periodos de Tiempos en los Anuncios</h2>
                 <div class="form-container">
-                    <form method="POST" action="">
+                    <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionPrecioPeriodoTiempoServlet">
                         <%
                             double[] preciosPeriodosTiempo = dataAnuncio.getPreciosPeriodoTiempo();
                         %>

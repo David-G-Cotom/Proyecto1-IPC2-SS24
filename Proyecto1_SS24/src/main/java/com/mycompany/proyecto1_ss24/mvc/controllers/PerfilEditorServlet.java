@@ -7,7 +7,6 @@ package com.mycompany.proyecto1_ss24.mvc.controllers;
 import com.mycompany.proyecto1_ss24.backend.data.EditorDB;
 import com.mycompany.proyecto1_ss24.backend.model.users.Editor;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

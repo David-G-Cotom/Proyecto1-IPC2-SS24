@@ -4,6 +4,9 @@
     Author     : Carlos Cotom
 --%>
 
+<%@page import="java.util.ArrayList" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.PreciosRevistaDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,6 @@
                 <li><a href="log/registro-usuario.jsp">Registrarse</a></li>
             </ul>
         </nav>
-
         <div id="left-sidebar" class="sidebar">
             <div class="sidecontent">Anuncio Izquierdo 1</div>
             <div class="sidecontent">Anuncio Izquierdo 2</div>
@@ -43,37 +45,26 @@
             <div class="sidecontent">Anuncio Izquierdo 1</div>
             <div class="sidecontent">Anuncio Izquierdo 2</div>      
         </div>
-
         <div id="content-block">
+            <%
+                ArrayList<Revista> revistas = new ArrayList<>();
+                PreciosRevistaDB dataRevistas = new PreciosRevistaDB();
+                revistas = dataRevistas.getAllRevistas();
+                for(Revista revista : revistas) {
+            %>
             <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Autor</p>
-                <p>Likes</p>
+                <h2>Nombre de Revista: <%=revista.getNombreRevista()%></h2>
+                <p>Descripcion: <%=revista.getDescripcion()%></p>
+                <p>Categoria: <%=revista.getCategoria()%></p>
+                <p>Etiquetas: <%=revista.getEtiquetas()%></p>
+                <p>Nombre del Autor: <%=revista.getAutor().getNombre()%></p>
+                <p>Likes: <%=revista.getLikes()%></p>
                 <button type="button" onclick="alert('Antes, Debes Registrarte o Iniciar Sesion como Suscriptor')">Suscribirse</button>
-            </div>
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Autor</p>
-                <p>Likes</p>
-                <button type="button" onclick="alert('Antes, Debes Registrarte o Iniciar Sesion como Suscriptor')">Suscribirse</button>
-            </div>
-            <div>
-                <h2>Revista</h2>
-                <p>Descripcion de Revista</p>
-                <p>Categirias</p>
-                <p>Etiquetas</p>
-                <p>Autor</p>
-                <p>Likes</p>
-                <button type="button" onclick="alert('Antes, Debes Registrarte o Iniciar Sesion como Suscriptor')">Suscribirse</button>
-            </div>
+            </div>                    
+            <%    
+                }
+            %>
         </div>
-
         <div id="right-sidebar" class="sidebar">
             <div class="sidecontent">Anuncio Derecho 1 Anuncio Derecho 1 Anuncio Derecho 1</div>
             <div class="sidecontent">Anuncio Derecho 2</div>

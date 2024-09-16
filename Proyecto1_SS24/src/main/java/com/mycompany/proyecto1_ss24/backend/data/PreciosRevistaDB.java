@@ -4,7 +4,10 @@
  */
 package com.mycompany.proyecto1_ss24.backend.data;
 
+import com.mycompany.proyecto1_ss24.backend.model.CategoriaEnum;
+import com.mycompany.proyecto1_ss24.backend.model.EtiquetaEnum;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
+import com.mycompany.proyecto1_ss24.backend.model.users.Editor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,18 +29,126 @@ public class PreciosRevistaDB {
         try (Statement state = this.connection.createStatement();
                 ResultSet resul = state.executeQuery(query)){
             while (resul.next()) {
-                Revista revista = new Revista();
-                revista.setIdRevista(resul.getInt("id_revista"));
-                revista.setDescripcion(resul.getString("descripcion"));
-                revista.setLikes(resul.getInt("likes"));
+                Revista revista = this.crearPOJORevista(resul);
                 revista.setCosto(resul.getDouble("costo"));
-                revista.setNombreRevista(resul.getString("nombre"));
                 revistas.add(revista);
             }
         } catch (SQLException e) {
             System.out.println("Error al Consultar todas las Revistas Registradas en Sistema: " + e);
         }
         return revistas;
+    }
+    
+    private Revista crearPOJORevista(ResultSet resul) throws SQLException {
+        int idRevista = resul.getInt("id_revista");
+        String descripcion = resul.getString("descripcion");
+        int likes = resul.getInt("likes");
+        String nombre = resul.getString("nombre");
+        int idCategoria = resul.getInt("categoria");
+        String categoria = this.getCategoria(idCategoria);
+        ArrayList<EtiquetaEnum> etiquetas = this.getEtiquetas(idRevista);
+        Revista revista = new Revista(descripcion, CategoriaEnum.valueOf(categoria), etiquetas, likes, nombre, idRevista);
+        int idEditor = resul.getInt("editor");
+        int idUsuarioEditor = this.getIdUsuarioEditor(idEditor);
+        String nombreEditor = this.getNombreEditor(idUsuarioEditor);
+        Editor editor = new Editor();
+        editor.setNombre(nombreEditor);
+        editor.setIdEditor(idEditor);
+        revista.setAutor(editor);
+        return revista;
+    }
+    
+    private String getCategoria(int idCategoria) {
+        String query = "SELECT tipo FROM categoria WHERE id_categoria = ?";
+        String categoria = "";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idCategoria);
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    categoria = resul.getString("tipo");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el tipo de Categoria: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el tipo de Categoria: " + e);
+        }
+        return categoria;
+    }
+    
+    private ArrayList<EtiquetaEnum> getEtiquetas(int idRevista) {
+        ArrayList<Integer> ids = this.getTipoEtiquetas(idRevista);
+        ArrayList<EtiquetaEnum> etiquetas = new ArrayList<>();
+        for (Integer id : ids) {
+            String query = "SELECT tipo FROM tipo_etiqueta WHERE id_tipo = ?";
+            try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+                prepared.setInt(1, id);
+                try (ResultSet resul = prepared.executeQuery()) {
+                    if (resul.next()) {
+                        etiquetas.add(EtiquetaEnum.valueOf(resul.getString("tipo")));
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el Nombre del Tipo de Etiqueta: " + e);
+            }
+        }
+        return etiquetas;
+    }
+    
+    private ArrayList<Integer> getTipoEtiquetas(int idRevista) {
+        String query = "SELECT tipo_etiqueta FROM etiqueta WHERE revista = ?";
+        ArrayList<Integer> idsTipoEtiqueta = new ArrayList<>();
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idRevista);
+            try (ResultSet resul = prepared.executeQuery()) {
+                while (resul.next()) {
+                    idsTipoEtiqueta.add(resul.getInt("tipo_etiqueta"));
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el id del Tipo de Etiqueta: " + e);
+        }
+        return idsTipoEtiqueta;
+    }
+    
+    private int getIdUsuarioEditor(int idEditor) {
+        String query = "SELECT usuario FROM editor WHERE id_editor = ?";
+        int idUsuarioEditor = 0;
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idEditor);
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    idUsuarioEditor = resul.getInt("usuario");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el id del Usuario Autor: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el id del Usuario Autor: " + e);
+        }
+        return idUsuarioEditor;
+    }
+    
+    private String getNombreEditor(int idUsuarioEditor) {
+        String query = "SELECT nombre FROM usuario WHERE id_usuario = ?";
+        String nombreEditor = "";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setInt(1, idUsuarioEditor);
+            try (ResultSet resul = prepared.executeQuery()) {
+                if (resul.next()) {
+                    nombreEditor = resul.getString("nombre");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error en recibir el nombre del Usuario Autor: " + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el nombre del Usuario Autor: " + e);
+        }
+        return nombreEditor;
     }
     
     public void actualizarPrecioRevista(double precio, int idRevista) {

@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
-import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import com.mycompany.proyecto1_ss24.backend.model.CarteraControler;
 import java.io.IOException;

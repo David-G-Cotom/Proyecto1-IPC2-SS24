@@ -6,7 +6,6 @@ package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import com.mycompany.proyecto1_ss24.backend.model.CreadorSuscripcion;
-import com.mycompany.proyecto1_ss24.backend.model.Suscripcion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

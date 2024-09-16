@@ -5,7 +5,6 @@
 package com.mycompany.proyecto1_ss24.backend.model;
 
 import com.mycompany.proyecto1_ss24.backend.data.CompraAnuncioDB;
-import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;

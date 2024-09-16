@@ -98,10 +98,10 @@
                         <h3>Nombre de Revista: <%=revista.getNombreRevista()%></h3>
                         <p>Descripcion de Revista: <%=revista.getDescripcion()%></p>
                         <p>Likes: <%=revista.getLikes()%></p>
-                        <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionPrecioAnuncioServlet?id=<%=revista.getIdRevista()%>">
+                        <form method="POST" action="${pageContext.servletContext.contextPath}/EdicionPrecioRevistaServlet?id=<%=revista.getIdRevista()%>">
                             <div class="input-group">
-                                <label for="precio-rev1">Precio por Dia Actual: </label>
-                                <input type="text" id="precio-rev1" name="precio-rev1" value="<%=revista.getCosto()%>"/>
+                                <label for="precio">Precio por Dia Actual: </label>
+                                <input type="text" id="precio" name="precio" value="<%=revista.getCosto()%>"/>
                                 <button type="submit">Cambiar</button>
                             </div>
                         </form>

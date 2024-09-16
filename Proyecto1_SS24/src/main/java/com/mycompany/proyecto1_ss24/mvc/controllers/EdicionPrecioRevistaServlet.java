@@ -4,6 +4,8 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
+import com.mycompany.proyecto1_ss24.backend.model.ActualizadorPrecioRevista;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Carlos Cotom
  */
-@WebServlet(name = "EdicionPrecioAnuncioServlet", urlPatterns = {"/EdicionPrecioAnuncioServlet"})
-public class EdicionPrecioAnuncioServlet extends HttpServlet {
+@WebServlet(name = "EdicionPrecioRevistaServlet", urlPatterns = {"/EdicionPrecioRevistaServlet"})
+public class EdicionPrecioRevistaServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,7 +46,18 @@ public class EdicionPrecioAnuncioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        try {
+            ActualizadorPrecioRevista actualizador = new ActualizadorPrecioRevista();
+            int idRevista = Integer.parseInt(request.getParameter("id"));
+            actualizador.actualizarPrecioRevista(request, idRevista);
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>Se Actualizo el Precio de la Revista Correctamente</h1>");
+            }
+        } catch (UserDataInvalidException ex) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR!!! " + ex.getMessage() + "</h1>");
+            }
+        }
     }
 
 }

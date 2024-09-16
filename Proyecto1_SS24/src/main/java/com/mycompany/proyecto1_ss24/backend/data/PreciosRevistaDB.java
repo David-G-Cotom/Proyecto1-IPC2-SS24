@@ -6,6 +6,7 @@ package com.mycompany.proyecto1_ss24.backend.data;
 
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,6 +38,18 @@ public class PreciosRevistaDB {
             System.out.println("Error al Consultar todas las Revistas Registradas en Sistema: " + e);
         }
         return revistas;
+    }
+    
+    public void actualizarPrecioRevista(double precio, int idRevista) {
+        String query = "UPDATE revista SET costo = ? WHERE id_revista = ?";
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setDouble(1, precio);
+            prepared.setInt(2, idRevista);
+            prepared.executeUpdate();
+            System.out.println("Precio de la Revista Actualizado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error al Actualizar el Precio de la Revista: " + e);
+        }
     }
     
 }

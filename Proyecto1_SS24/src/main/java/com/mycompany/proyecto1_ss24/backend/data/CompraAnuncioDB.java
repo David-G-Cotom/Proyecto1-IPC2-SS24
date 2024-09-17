@@ -7,6 +7,7 @@ package com.mycompany.proyecto1_ss24.backend.data;
 import com.mycompany.proyecto1_ss24.backend.model.Pago;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTextoImagen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,7 +48,21 @@ public class CompraAnuncioDB {
             prepared.executeUpdate();
             System.out.println("Anuncio de Texto Creado!!!");
         } catch (SQLException e) {
-            System.out.println("Error en crear un Anuncio: " + e);
+            System.out.println("Error en crear un Anuncio de Texto: " + e);
+        }
+    }
+    
+    public void crearAnuncioTextoImagen(AnuncioTextoImagen anuncio) {
+        String query = "INSERT INTO anuncio_texto_imagen (contenido, id_anuncio, imagen) VALUES (?, ?, ?)";
+        int idUltimaRevista = this.getIdAnuncioCreado();
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setString(1, anuncio.getContenido());
+            prepared.setInt(2, idUltimaRevista);
+            prepared.setBlob(3, anuncio.getImagen());
+            prepared.executeUpdate();
+            System.out.println("Anuncio de Texto e Imagen Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Anuncio de Texto e Imagen: " + e);
         }
     }
     

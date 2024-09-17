@@ -4,9 +4,14 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
+import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTextoImagen;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorBuyAdTextImage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Carlos Cotom
  */
 @WebServlet(name = "BuyAdTextImageServlet", urlPatterns = {"/BuyAdTextImageServlet"})
+@MultipartConfig
 public class BuyAdTextImageServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,6 +50,18 @@ public class BuyAdTextImageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        CreadorBuyAdTextImage creadorCompra = new CreadorBuyAdTextImage();
+        try {
+            AnuncioTextoImagen anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>Se Compro el Anuncio: " + anuncioCreado.toString() + "</h1>");
+            }
+        } catch (UserDataInvalidException | UserActionInvalidException e) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");
+            }
+        }
     }
 
 }

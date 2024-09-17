@@ -81,24 +81,25 @@ public class AnuncioDB {
         }
         return anuncios;
     }
-    
-    public ArrayList<Anuncio> getAllAnuncios() {
+
+    public ArrayList<Anuncio> getAllAnunciosActivos() {
         String query = "SELECT * FROM anuncio";
         ArrayList<Anuncio> anuncios = new ArrayList<>();
-        try (Statement state = this.connection.createStatement();
-                ResultSet resul = state.executeQuery(query)){
+        try (Statement state = this.connection.createStatement(); ResultSet resul = state.executeQuery(query)) {
             while (resul.next()) {
                 int idAnuncio = resul.getInt("id_anuncio");
-                    double costo = resul.getDouble("costo");
-                    int idTipoAnuncio = resul.getInt("tipo_anuncio");
-                    int idInversionista = resul.getInt("inversionista");
-                    int vigencia = resul.getInt("vigencia_dias");
-                    boolean estado = resul.getBoolean("estado");
-                    int idPeriodo = resul.getInt("id_periodo");
-                    Anuncio anuncio = new Anuncio(costo, vigencia, estado, idInversionista, idPeriodo, idTipoAnuncio);
-                    anuncio.setIdAnuncio(idAnuncio);
-                    anuncio.setTitulo(resul.getString("titulo"));
+                double costo = resul.getDouble("costo");
+                int idTipoAnuncio = resul.getInt("tipo_anuncio");
+                int idInversionista = resul.getInt("inversionista");
+                int vigencia = resul.getInt("vigencia_dias");
+                boolean isActivo = resul.getBoolean("estado");
+                int idPeriodo = resul.getInt("id_periodo");
+                Anuncio anuncio = new Anuncio(costo, vigencia, isActivo, idInversionista, idPeriodo, idTipoAnuncio);
+                anuncio.setIdAnuncio(idAnuncio);
+                anuncio.setTitulo(resul.getString("titulo"));
+                if (isActivo) {
                     this.agregarAnuncioEspecifico(anuncios, anuncio);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error al Consultar Todos los Anuncios Registrados: " + e);

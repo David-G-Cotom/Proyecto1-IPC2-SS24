@@ -10,7 +10,7 @@
 <%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTextoImagen" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioVideo" %>
-<%@page import="com.mycompany.proyecto1_ss24.backend.data.AnuncioDB" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.MostrarAnunciosControler" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.data.PreciosRevistaDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,13 +29,13 @@
             </ul>
         </nav>
         <%
-            AnuncioDB dataAnuncios = new AnuncioDB();
-            ArrayList<Anuncio> anuncios = new ArrayList<>();
-            anuncios = dataAnuncios.getAllAnuncios();
+            MostrarAnunciosControler dataAnuncios = new MostrarAnunciosControler(); 
+            ArrayList<Anuncio> anunciosIzquierda = dataAnuncios.getAnunciosIzquierda();
+            ArrayList<Anuncio> anunciosDerecha = dataAnuncios.getAnunciosDerecha();
         %>
         <div id="left-sidebar" class="sidebar">
             <%
-                for(Anuncio anuncio : anuncios) {
+                for(Anuncio anuncio : anunciosIzquierda) {
                     if (anuncio instanceof AnuncioTexto) {
                         AnuncioTexto anuncioTexto = (AnuncioTexto) anuncio;
             %>
@@ -90,7 +90,7 @@
         </div>
         <div id="right-sidebar" class="sidebar">
             <%
-                for(Anuncio anuncio : anuncios) {
+                for(Anuncio anuncio : anunciosDerecha) {
                     if (anuncio instanceof AnuncioTexto) {
                         AnuncioTexto anuncioTexto = (AnuncioTexto) anuncio;
             %>

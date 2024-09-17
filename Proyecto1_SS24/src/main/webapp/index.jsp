@@ -6,6 +6,11 @@
 
 <%@page import="java.util.ArrayList" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.model.Revista" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTextoImagen" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioVideo" %>
+<%@page import="com.mycompany.proyecto1_ss24.backend.data.AnuncioDB" %>
 <%@page import="com.mycompany.proyecto1_ss24.backend.data.PreciosRevistaDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,27 +28,45 @@
                 <li><a href="log/registro-usuario.jsp">Registrarse</a></li>
             </ul>
         </nav>
+        <%
+            AnuncioDB dataAnuncios = new AnuncioDB();
+            ArrayList<Anuncio> anuncios = new ArrayList<>();
+            anuncios = dataAnuncios.getAllAnuncios();
+        %>
         <div id="left-sidebar" class="sidebar">
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>
-            <div class="sidecontent">Anuncio Izquierdo 1</div>
-            <div class="sidecontent">Anuncio Izquierdo 2</div>      
+            <%
+                for(Anuncio anuncio : anuncios) {
+                    if (anuncio instanceof AnuncioTexto) {
+                        AnuncioTexto anuncioTexto = (AnuncioTexto) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Texto</h2>
+                <h3>Titulo: <%=anuncioTexto.getTitulo()%></h3>
+                <p>Contenido: <%=anuncioTexto.getContenido()%></p>
+            </div>
+            <%
+                    } else if (anuncio instanceof AnuncioTextoImagen) {
+                        AnuncioTextoImagen anuncioTextoImagen = (AnuncioTextoImagen) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Texto e Imagen</h2>
+                <h3>Titulo: <%=anuncioTextoImagen.getTitulo()%></h3>
+                <p>Contenido: <%=anuncioTextoImagen.getContenido()%></p>
+                <img src="${pageContext.servletContext.contextPath}/ImageControlerAdServlet?id=<%=anuncioTextoImagen.getIdAdTextoImagen()%>" alt="Foto de perfil" class="profile-img" width="200px" height="200px">
+            </div>
+            <%
+                    } else if (anuncio instanceof AnuncioVideo) {
+                        AnuncioVideo anuncioVideo = (AnuncioVideo) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Video</h2>
+                <h3>Titulo: <%=anuncioVideo.getTitulo()%></h3>
+                <video src="${pageContext.servletContext.contextPath}/VideoControlerServlet?id=<%=anuncioVideo.getIdAnuncioVideo()%>" width="200" height="200" controls></video>                
+            </div>
+            <%
+                    }
+                }
+            %>   
         </div>
         <div id="content-block">
             <%
@@ -66,8 +89,39 @@
             %>
         </div>
         <div id="right-sidebar" class="sidebar">
-            <div class="sidecontent">Anuncio Derecho 1 Anuncio Derecho 1 Anuncio Derecho 1</div>
-            <div class="sidecontent">Anuncio Derecho 2</div>
+            <%
+                for(Anuncio anuncio : anuncios) {
+                    if (anuncio instanceof AnuncioTexto) {
+                        AnuncioTexto anuncioTexto = (AnuncioTexto) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Texto</h2>
+                <h3>Titulo: <%=anuncioTexto.getTitulo()%></h3>
+                <p>Contenido: <%=anuncioTexto.getContenido()%></p>
+            </div>
+            <%
+                    } else if (anuncio instanceof AnuncioTextoImagen) {
+                        AnuncioTextoImagen anuncioTextoImagen = (AnuncioTextoImagen) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Texto e Imagen</h2>
+                <h3>Titulo: <%=anuncioTextoImagen.getTitulo()%></h3>
+                <p>Contenido: <%=anuncioTextoImagen.getContenido()%></p>
+                <img src="${pageContext.servletContext.contextPath}/ImageControlerAdServlet?id=<%=anuncioTextoImagen.getIdAdTextoImagen()%>" alt="Foto de perfil" class="profile-img" width="200px" height="200px">
+            </div>
+            <%
+                    } else if (anuncio instanceof AnuncioVideo) {
+                        AnuncioVideo anuncioVideo = (AnuncioVideo) anuncio;
+            %>
+            <div class="sidecontent">
+                <h2>Anuncio de Video</h2>
+                <h3>Titulo: <%=anuncioVideo.getTitulo()%></h3>
+                <video src="${pageContext.servletContext.contextPath}/VideoControlerServlet?id=<%=anuncioVideo.getIdAnuncioVideo()%>" width="200" height="200" controls></video>                
+            </div>
+            <%
+                    }
+                }
+            %>
         </div>
     </body>
 </html>

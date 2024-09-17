@@ -37,8 +37,8 @@ body {
 }
 
 .sidebar {
-    width: 200px;
-    background-color: #f4f4f4;
+    width: 250px;
+    background-color: #e3e3e3;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     padding: 10px;
     overflow-y: auto;
@@ -56,7 +56,7 @@ body {
 }
 
 #content-block {
-    margin: 60px 250px; /* Espacio para las barras laterales y la barra de navegación */
+    margin: 60px 300px; /* Espacio para las barras laterales y la barra de navegación */
 }
 
 #content-block div {

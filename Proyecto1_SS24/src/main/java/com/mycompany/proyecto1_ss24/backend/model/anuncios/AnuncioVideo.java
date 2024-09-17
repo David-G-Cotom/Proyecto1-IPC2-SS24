@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto1_ss24.backend.model.anuncios;
 
+import java.io.InputStream;
 
 /**
  *
@@ -11,23 +12,23 @@ package com.mycompany.proyecto1_ss24.backend.model.anuncios;
  */
 public class AnuncioVideo extends Anuncio {
     
-    private String pathVideo;
+    private InputStream video;
 
     public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
     }
 
-    public AnuncioVideo(String pathVideo, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+    public AnuncioVideo(InputStream pathVideo, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
-        this.pathVideo = pathVideo;
+        this.video = pathVideo;
     }
 
-    public String getPathVideo() {
-        return pathVideo;
+    public InputStream getVideo() {
+        return video;
     }
 
-    public void setPathVideo(String pathVideo) {
-        this.pathVideo = pathVideo;
+    public void setVideo(InputStream video) {
+        this.video = video;
     }        
     
 }

@@ -10,13 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Compra de Anuncio</title>
+        <title>Compra de Anuncio de Texto</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <div class="form-container">
-            <h1>Compra de Anuncio</h1>
-            <form method="POST" action="${pageContext.servletContext.contextPath}/CompraAnuncioServlet">
+            <h1>Compra de Anuncio de Texto</h1>
+            <form method="POST" action="${pageContext.servletContext.contextPath}/BuyAdTextServlet">
                 <input type="hidden" name="idUsuario" value="${param.id}">
                 <div class="input-group">
                     <label for="fecha">Fecha de Compra:</label>
@@ -38,6 +38,14 @@
                         <option value="7">7 DIAS</option>               
                         <option value="14">14 DIAS</option>               
                     </select>
+                </div>
+                <div class="input-group">
+                    <label for="titulo">Titulo del Anuncio:</label>
+                    <input type="text" id="titulo" name="titulo"/>
+                </div>
+                <div class="input-group">
+                    <label for="contenido">Contenido del Anuncio:</label>
+                    <textarea id="contenido" name="contenido"></textarea>
                 </div>
                 <button type="submit">Comprar</button>
             </form>

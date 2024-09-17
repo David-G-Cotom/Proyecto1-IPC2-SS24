@@ -4,10 +4,6 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
-import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
-import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorCompraAnuncio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,8 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Carlos Cotom
  */
-@WebServlet(name = "CompraAnuncioServlet", urlPatterns = {"/CompraAnuncioServlet"})
-public class CompraAnuncioServlet extends HttpServlet {
+@WebServlet(name = "BuyAdTextImageServlet", urlPatterns = {"/BuyAdTextImageServlet"})
+public class BuyAdTextImageServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,18 +44,6 @@ public class CompraAnuncioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        CreadorCompraAnuncio creadorCompra = new CreadorCompraAnuncio();
-        try {
-            Anuncio anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Se Compro el Anuncio: " + anuncioCreado.toString() + "</h1>");
-            }
-        } catch (UserDataInvalidException | UserActionInvalidException e) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");
-            }
-        }
     }
 
 }

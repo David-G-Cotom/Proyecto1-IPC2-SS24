@@ -21,7 +21,9 @@
         <div class="sidebar">
             <h2>Menú</h2>
             <ul>
-                <li><a href="inversionista/comprar-anuncio.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio</a></li>
+                <li><a href="inversionista/comprar-anuncio-texto.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio de Texto</a></li>
+                <li><a href="inversionista/comprar-anuncio-texto-imagen.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio de Texto e Imagen</a></li>
+                <li><a href="inversionista/comprar-anuncio-video.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio de Video</a></li>
                 <li><a href="${pageContext.servletContext.contextPath}/PerfilServlet?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Perfil</a></li>
                 <li><a href="inversionista/recargar-credito.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Recargar Credito</a></li>
             </ul>

@@ -18,6 +18,7 @@ public class Anuncio {
     private int idPeriodoTiempo;
     private int idTipoAnuncio;
     private int idAnuncio;
+    private String titulo;
     
     public Anuncio() {
     }
@@ -85,6 +86,14 @@ public class Anuncio {
 
     public void setIdAnuncio(int idAnuncio) {
         this.idAnuncio = idAnuncio;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     @Override

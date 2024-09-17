@@ -46,6 +46,12 @@ body {
     box-sizing: border-box;
 }
 
+textarea {
+  resize: none;
+  width: 60%;
+  height: 125px;
+}
+
 .radio-group {
     margin: 15px 0;
 }
@@ -61,4 +67,19 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+#mediaFile {
+    display: block;
+    margin: 0 auto 25px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }

@@ -19,10 +19,10 @@ public class AnuncioTextoImagen extends Anuncio {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
     }
 
-    public AnuncioTextoImagen(String contenido, InputStream pathImage, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+    public AnuncioTextoImagen(String contenido, InputStream imagen, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
         this.contenido = contenido;
-        this.imagen = pathImage;
+        this.imagen = imagen;
     }
 
     public String getContenido() {

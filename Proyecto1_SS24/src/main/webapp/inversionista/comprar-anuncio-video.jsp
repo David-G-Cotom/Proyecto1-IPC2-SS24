@@ -22,14 +22,7 @@
                     <label for="fecha">Fecha de Compra:</label>
                     <input type="date" id="fecha" name="fecha"/>
                 </div>
-                <div class="input-group">
-                    <label for="tipoanuncio">Tipo de Anuncio:</label>
-                    <select id="tipoanuncio" name="tipoanuncio">
-                        <option value="ANUNCIO_TEXTO">ANUNCIO DE TEXTO</option>
-                        <option value="ANUNCIO_TEXTO_IMAGEN">ANUNCIO DE TEXTO E IMAGEN</option>
-                        <option value="ANUNCIO_VIDEO">ANUNCIO DE VIDEO</option>               
-                    </select>
-                </div>
+                <input type="hidden" name="tipoanuncio" value="ANUNCIO_VIDEO">
                 <div class="input-group">
                     <label for="duracion">Duracion de Anuncio:</label>
                     <select id="duracion" name="duracion">
@@ -45,7 +38,7 @@
                 </div>
                 <div class="input-group">
                     <label for="mediaFile">Video del Anuncio</label>                    
-                    <input type="file" data-buttonText="Foto" name="mediaFile" id="mediaFile">                        
+                    <input type="file" data-buttonText="Foto" name="videoFile" id="mediaFile">                        
                 </div>
                 <button type="submit">Comprar</button>
             </form>

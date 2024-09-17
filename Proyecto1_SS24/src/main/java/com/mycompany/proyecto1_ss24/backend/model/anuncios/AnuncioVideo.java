@@ -18,9 +18,9 @@ public class AnuncioVideo extends Anuncio {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
     }
 
-    public AnuncioVideo(InputStream pathVideo, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
+    public AnuncioVideo(InputStream video, double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
-        this.video = pathVideo;
+        this.video = video;
     }
 
     public InputStream getVideo() {

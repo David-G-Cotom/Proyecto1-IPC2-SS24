@@ -6,10 +6,12 @@ package com.mycompany.proyecto1_ss24.backend.data;
 
 import com.mycompany.proyecto1_ss24.backend.model.Pago;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -20,7 +22,7 @@ public class CompraAnuncioDB {
     private final Connection connection = ConexionDB.getConnection();
     
     public void crearAnuncio(Anuncio anuncio, int idInversionista) {
-        String query = "INSERT INTO anuncio (costo, tipo_anuncio, inversionista, vigencia_dias, estado, id_periodo) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO anuncio (costo, tipo_anuncio, inversionista, vigencia_dias, estado, id_periodo, titulo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
             prepared.setDouble(1, anuncio.getPrecio());
             prepared.setInt(2, anuncio.getIdTipoAnuncio());
@@ -28,11 +30,39 @@ public class CompraAnuncioDB {
             prepared.setInt(4, anuncio.getVigenciaDias());
             prepared.setBoolean(5, anuncio.isIsActivo());
             prepared.setInt(6, anuncio.getIdPeriodoTiempo());
+            prepared.setString(7, anuncio.getTitulo());
             prepared.executeUpdate();
             System.out.println("Anuncio Creado!!!");
         } catch (SQLException e) {
             System.out.println("Error en crear un Anuncio: " + e);
         }
+    }
+    
+    public void crearAnuncioTexto(AnuncioTexto anuncio) {
+        String query = "INSERT INTO anuncio_texto (contenido, id_anuncio) VALUES (?, ?)";
+        int idUltimaRevista = this.getIdAnuncioCreado();
+        try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
+            prepared.setString(1, anuncio.getContenido());
+            prepared.setInt(2, idUltimaRevista);
+            prepared.executeUpdate();
+            System.out.println("Anuncio de Texto Creado!!!");
+        } catch (SQLException e) {
+            System.out.println("Error en crear un Anuncio: " + e);
+        }
+    }
+    
+    private int getIdAnuncioCreado() {
+        String query = "SELECT id_anuncio FROM anuncio ORDER BY id_anuncio DESC LIMIT 1";
+        int idAnuncio = 0;
+        try (Statement state = connection.createStatement();
+                ResultSet resul = state.executeQuery(query)) {
+            if (resul.next()) {
+                idAnuncio = resul.getInt("id_anuncio");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en recibir el id del Ultimo Anuncio Creada: " + e);
+        }
+        return idAnuncio;
     }
     
     public void crearApago(Pago pago) {

@@ -22,14 +22,7 @@
                     <label for="fecha">Fecha de Compra:</label>
                     <input type="date" id="fecha" name="fecha"/>
                 </div>
-                <div class="input-group">
-                    <label for="tipoanuncio">Tipo de Anuncio:</label>
-                    <select id="tipoanuncio" name="tipoanuncio">
-                        <option value="ANUNCIO_TEXTO">ANUNCIO DE TEXTO</option>
-                        <option value="ANUNCIO_TEXTO_IMAGEN">ANUNCIO DE TEXTO E IMAGEN</option>
-                        <option value="ANUNCIO_VIDEO">ANUNCIO DE VIDEO</option>               
-                    </select>
-                </div>
+                <input type="hidden" name="tipoanuncio" value="ANUNCIO_TEXTO">
                 <div class="input-group">
                     <label for="duracion">Duracion de Anuncio:</label>
                     <select id="duracion" name="duracion">

@@ -16,33 +16,34 @@ import java.time.format.DateTimeParseException;
  *
  * @author Carlos Cotom
  */
-public class CreadorCompraAnuncio {
+public class CreadorBuyAdText {
 
     private final CompraAnuncioDB dataCompra = new CompraAnuncioDB();
-    private Anuncio anuncio;
+    private AnuncioTexto anuncio;
     private Pago pago;
 
-    public Anuncio crearCompra(HttpServletRequest request, int idUsuario) throws UserDataInvalidException, UserActionInvalidException {
+    public AnuncioTexto crearCompra(HttpServletRequest request, int idUsuario) throws UserDataInvalidException, UserActionInvalidException {
         int idInversionista = dataCompra.getIdInversionista(idUsuario);
         this.extraerYValidar(request, idInversionista);
         dataCompra.crearAnuncio(this.anuncio, idInversionista);
+        dataCompra.crearAnuncioTexto(anuncio);
         dataCompra.crearApago(pago);
         dataCompra.actualizarCreditoInversionistaCompra(pago.getCantidadPaog(), idInversionista);
         return this.anuncio;
     }
 
     private void extraerYValidar(HttpServletRequest request, int idInversionista) throws UserDataInvalidException, UserActionInvalidException {        
+        String tipoAnuncio = request.getParameter("tipoanuncio");
+        String duracionDias = request.getParameter("duracion");
+        String tituloAnuncio = request.getParameter("titulo");
+        String contenidoAnuncio = request.getParameter("contenido");
         LocalDate fecha;
-        String tipoAnuncio;
-        String duracionDias;
         try {
             fecha = LocalDate.parse(request.getParameter("fecha"));
-            tipoAnuncio = request.getParameter("tipoanuncio");
-            duracionDias = request.getParameter("duracion");
         } catch (DateTimeParseException e) {
             throw new UserDataInvalidException("Error en el Campo de la Fecha");
         }
-        this.isValidateCreation(fecha, tipoAnuncio, duracionDias);
+        this.isValidateCreation(fecha, duracionDias, contenidoAnuncio, tituloAnuncio);
         double costoCompra = dataCompra.getCostoCompra(tipoAnuncio, duracionDias);
         double creditoInversionista = dataCompra.getCredito(idInversionista);
         if (costoCompra > creditoInversionista) {
@@ -51,19 +52,23 @@ public class CreadorCompraAnuncio {
         int idTipoAnuncio = dataCompra.getIdTipoAnuncio(tipoAnuncio);
         int idPeriodoTiempo = dataCompra.getIdPeriodoTiempo(duracionDias);
         int vigenciaDias = Integer.parseInt(duracionDias);
-        this.anuncio = new Anuncio(costoCompra, vigenciaDias, true, idInversionista, idPeriodoTiempo, idTipoAnuncio);        
+        this.anuncio = new AnuncioTexto(contenidoAnuncio, costoCompra, vigenciaDias, true, idInversionista, idPeriodoTiempo, idTipoAnuncio);
+        this.anuncio.setTitulo(tituloAnuncio);
         this.pago = new Pago(costoCompra, fecha, idInversionista);
     }
 
-    private void isValidateCreation(LocalDate fecha, String tipoAnuncio, String duracionDias) throws UserDataInvalidException {
-        if (tipoAnuncio == null || tipoAnuncio.equals("")) {
-            throw new UserDataInvalidException("Debe Eleguir una Tipo de Anuncio");
-        }
+    private void isValidateCreation(LocalDate fecha, String duracionDias, String contenido, String titulo) throws UserDataInvalidException {        
         if (fecha == null) {
             throw new UserDataInvalidException("Debe completar el Campo para la Fecha de Compra del Anuncio");
         }
-        if (duracionDias == null || duracionDias.equals("")) {
+        if (duracionDias.equals("")) {
             throw new UserDataInvalidException("Debe Eleguir una Duracion para el Anuncio");
+        }
+        if (contenido.equals("")) {
+            throw new UserDataInvalidException("Debe Completar el Campo para el Contenido del Anuncio");
+        }
+        if (titulo.equals("")) {
+            throw new UserDataInvalidException("Debe Completar el Campo para el Titulo del Anuncio");
         }
     }
 

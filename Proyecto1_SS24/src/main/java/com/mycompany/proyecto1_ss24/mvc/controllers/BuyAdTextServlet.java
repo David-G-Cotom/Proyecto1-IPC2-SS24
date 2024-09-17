@@ -6,8 +6,8 @@ package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.Anuncio;
-import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorCompraAnuncio;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto;
+import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorBuyAdText;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -49,9 +49,9 @@ public class BuyAdTextServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        CreadorCompraAnuncio creadorCompra = new CreadorCompraAnuncio();
+        CreadorBuyAdText creadorCompra = new CreadorBuyAdText();
         try {
-            Anuncio anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
+            AnuncioTexto anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>Se Compro el Anuncio: " + anuncioCreado.toString() + "</h1>");
             }

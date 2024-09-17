@@ -177,7 +177,7 @@ public class RevistaDB {
     }
 
     public int getIdRevistaCreada() {
-        String query = "Select id_revista FROM revista ORDER BY id_revista DESC LIMIT 1";
+        String query = "SELECT id_revista FROM revista ORDER BY id_revista DESC LIMIT 1";
         int idRevista = 0;
         try (Statement state = connection.createStatement(); ResultSet resultSet = state.executeQuery(query)) {
             if (resultSet.next()) {

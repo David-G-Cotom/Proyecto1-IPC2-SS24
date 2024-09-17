@@ -80,12 +80,12 @@ public class CreadorBuyAdVideo {
             throw new UserDataInvalidException("Debe Seleccionar un Video para el Anuncio");
         }
         if (!this.extensCorrect(fileName)) {
-            throw new UserDataInvalidException("El Archivo Seleccionado debe de ser en formato: .avi .mp4 .mkv .webm .ogg .flv .mov .wmv .avchd");
+            throw new UserDataInvalidException("El Archivo Seleccionado debe de ser en formato: .avi .mp4 .mkv .webm .ogg .flv .mov .wmv");
         }
     }
 
     private boolean extensCorrect(String fileName) {
-        String[] extens = {".avi", ".mp4", ".mkv", ".webm", ".ogg", ".flv", ".mov", ".wmv", ".avchd"};
+        String[] extens = {".avi", ".mp4", ".mkv", ".webm", ".ogg", ".flv", ".mov", ".wmv"};
         for (String exten : extens) {
             if (fileName.toLowerCase().endsWith(exten)) {
                 return true;

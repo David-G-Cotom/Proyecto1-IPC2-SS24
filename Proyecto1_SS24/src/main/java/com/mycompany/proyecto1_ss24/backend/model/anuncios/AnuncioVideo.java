@@ -13,6 +13,10 @@ import java.io.InputStream;
 public class AnuncioVideo extends Anuncio {
     
     private InputStream video;
+    private int idAnuncioVideo;
+
+    public AnuncioVideo() {
+    }
 
     public AnuncioVideo(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
@@ -29,6 +33,14 @@ public class AnuncioVideo extends Anuncio {
 
     public void setVideo(InputStream video) {
         this.video = video;
-    }        
+    }    
+
+    public int getIdAnuncioVideo() {
+        return idAnuncioVideo;
+    }
+
+    public void setIdAnuncioVideo(int idAnuncioVideo) {
+        this.idAnuncioVideo = idAnuncioVideo;
+    }
     
 }

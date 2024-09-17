@@ -12,6 +12,10 @@ package com.mycompany.proyecto1_ss24.backend.model.anuncios;
 public class AnuncioTexto extends Anuncio {
     
     private String contenido;
+    private int idAnuncioTexto;
+
+    public AnuncioTexto() {
+    }
 
     public AnuncioTexto(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
@@ -29,5 +33,13 @@ public class AnuncioTexto extends Anuncio {
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }        
+
+    public int getIdAnuncioTexto() {
+        return idAnuncioTexto;
+    }
+
+    public void setIdAnuncioTexto(int idAnuncioTexto) {
+        this.idAnuncioTexto = idAnuncioTexto;
+    }
     
 }

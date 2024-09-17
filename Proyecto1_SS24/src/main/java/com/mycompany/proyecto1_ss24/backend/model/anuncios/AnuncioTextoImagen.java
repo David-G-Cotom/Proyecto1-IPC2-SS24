@@ -14,6 +14,10 @@ public class AnuncioTextoImagen extends Anuncio {
     
     private String contenido;
     private InputStream imagen;
+    private int idAdTextoImagen;
+
+    public AnuncioTextoImagen() {
+    }
 
     public AnuncioTextoImagen(double precio, int vigenciaDias, boolean isActivo, int idInversionista, int idPeriodoTiempo, int idTipoAnuncio) {
         super(precio, vigenciaDias, isActivo, idInversionista, idPeriodoTiempo, idTipoAnuncio);
@@ -40,5 +44,13 @@ public class AnuncioTextoImagen extends Anuncio {
     public void setImagen(InputStream imagen) {
         this.imagen = imagen;
     }    
+
+    public int getIdAdTextoImagen() {
+        return idAdTextoImagen;
+    }
+
+    public void setIdAdTextoImagen(int idAdTextoImagen) {
+        this.idAdTextoImagen = idAdTextoImagen;
+    }
     
 }

@@ -4,10 +4,12 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.data.PerfilDB;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserActionInvalidException;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.AnuncioTexto;
 import com.mycompany.proyecto1_ss24.backend.model.anuncios.CreadorBuyAdText;
+import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -52,9 +54,12 @@ public class BuyAdTextServlet extends HttpServlet {
         CreadorBuyAdText creadorCompra = new CreadorBuyAdText();
         try {
             AnuncioTexto anuncioCreado = creadorCompra.crearCompra(request, idUsuario);
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Se Compro el Anuncio: " + anuncioCreado.toString() + "</h1>");
-            }
+            System.out.println(anuncioCreado);
+            System.out.println("ANUNCIO DE TEXTO REGISTRADO EXITOSAMENTE");
+            PerfilDB data = new PerfilDB();
+            UsuarioAplicacion usuario = data.getUsuario(idUsuario);
+            request.setAttribute("usuarioLogeado", usuario);
+            request.getRequestDispatcher("/inversionista/interfaz-principal.jsp").forward(request, response);
         } catch (UserDataInvalidException | UserActionInvalidException e) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");

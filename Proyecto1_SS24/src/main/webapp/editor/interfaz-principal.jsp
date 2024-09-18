@@ -36,7 +36,7 @@
                 RevistaDB dataRevistas = new RevistaDB();
                 UsuarioAplicacion usuario = (UsuarioAplicacion) request.getAttribute("usuarioLogeado");
                 int idEditor = dataRevistas.getIdEditor(usuario.getIdUsuario());
-                revistas = dataRevistas.getRevistas(idEditor);
+                revistas = dataRevistas.getRevistasEditor(idEditor);
                 for(Revista revista : revistas) {
             %>
                 <div>
@@ -45,6 +45,9 @@
                     <p>Categoria: <%=revista.getCategoria()%></p>
                     <p>Etiquetas: <%=revista.getEtiquetas()%></p>
                     <p>Likes: <%=revista.getLikes()%></p>
+                    <p>Puede tener Comentarios: <%=revista.isPuedeComentarse()%></p>
+                    <p>Puede tener Likes: <%=revista.isPuedeTenerLikes()%></p>
+                    <p>Puede tener Suscripciones: <%=revista.isPuedeSuscribirse()%></p>
                     <a href="editor/editar-revista.jsp?id=<%=revista.getIdRevista()%>">Editar</a>
                 </div>
             <%

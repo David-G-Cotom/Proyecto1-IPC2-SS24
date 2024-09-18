@@ -165,6 +165,9 @@ public class SuscriptorDB {
         editor.setNombre(nombreEditor);
         editor.setIdEditor(idEditor);
         revista.setAutor(editor);
+        revista.setPuedeComentarse(resul.getBoolean("estado_comentarios"));
+        revista.setPuedeSuscribirse(resul.getBoolean("estado_suscripcion"));
+        revista.setPuedeTenerLikes(resul.getBoolean("estado_likes"));
         return revista;
     }
     

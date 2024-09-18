@@ -4,9 +4,11 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.data.PerfilDB;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import com.mycompany.proyecto1_ss24.backend.model.CreadorRevistas;
 import com.mycompany.proyecto1_ss24.backend.model.Revista;
+import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -53,9 +55,12 @@ public class NuevaRevistaServlet extends HttpServlet {
         CreadorRevistas creadorRevistas = new CreadorRevistas();
         try {
             Revista revistaCreada = creadorRevistas.crearRevista(request, idUsuario);
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Se creo la Revista: " + revistaCreada.toString() + "</h1>");
-            }
+            System.out.println(revistaCreada);
+            System.out.println("REVISTA REGISTRADA EXITOSAMENTE");
+            PerfilDB data = new PerfilDB();
+            UsuarioAplicacion usuario = data.getUsuario(idUsuario);
+            request.setAttribute("usuarioLogeado", usuario);
+            request.getRequestDispatcher("/editor/interfaz-principal.jsp").forward(request, response);
         } catch (UserDataInvalidException e) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");

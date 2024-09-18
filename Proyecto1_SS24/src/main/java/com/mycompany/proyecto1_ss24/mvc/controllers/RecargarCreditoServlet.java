@@ -4,8 +4,10 @@
  */
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
+import com.mycompany.proyecto1_ss24.backend.data.PerfilDB;
 import com.mycompany.proyecto1_ss24.backend.exceptions.UserDataInvalidException;
 import com.mycompany.proyecto1_ss24.backend.model.CarteraControler;
+import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -50,9 +52,10 @@ public class RecargarCreditoServlet extends HttpServlet {
         CarteraControler recargaCartera = new CarteraControler();
         try {
             recargaCartera.crearRecargarCredito(request, idUsuario);
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Se Realizo la Recarga Exitosamente</h1>");
-            }
+            PerfilDB data = new PerfilDB();
+            UsuarioAplicacion usuario = data.getUsuario(idUsuario);
+            request.setAttribute("usuarioLogeado", usuario);
+            request.getRequestDispatcher("/inversionista/interfaz-principal.jsp").forward(request, response);
         } catch (UserDataInvalidException e) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>ERROR!!! " + e.getMessage() + "</h1>");

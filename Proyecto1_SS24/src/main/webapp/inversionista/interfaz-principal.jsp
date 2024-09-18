@@ -41,7 +41,7 @@
                 int idInversionista = dataAnuncios.getIdInversionista(usuario.getIdUsuario());
             %>
             <h3>Este es tu Credito Actual: <%=dataCredito.getCredito(idInversionista)%></h3>
-            <p>Estas son tus Anuncios Registradas en el Sistema</p>
+            <p>Estos son tus Anuncios Registradas en el Sistema</p>
             <%
                 ArrayList<Anuncio> anuncios = new ArrayList<>();
                 anuncios = dataAnuncios.getAnuncios(idInversionista);
@@ -56,7 +56,7 @@
                 <p>Vigencia en Dias: <%=anuncioTexto.getVigenciaDias()%></p>
                 <p>Esta Activo: <%=anuncioTexto.isIsActivo()%></p>
                 <p>Costo: <%=anuncioTexto.getPrecio()%></p>
-                <a href="inversionista/editar-anuncio.jsp?id=<%=anuncioTexto.getIdAnuncio()%>">Editar</a>
+                <a href="inversionista/editar-anuncio.jsp?anuncio=<%=anuncioTexto.getIdAnuncio()%>&id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
             </div>
             <%
                     } else if (anuncio instanceof AnuncioTextoImagen) {
@@ -70,7 +70,7 @@
                 <p>Vigencia en Dias: <%=anuncioTextoImagen.getVigenciaDias()%></p>
                 <p>Esta Activo: <%=anuncioTextoImagen.isIsActivo()%></p>
                 <p>Costo: <%=anuncioTextoImagen.getPrecio()%></p>
-                <a href="inversionista/editar-anuncio.jsp?id=<%=anuncioTextoImagen.getIdAnuncio()%>">Editar</a>
+                <a href="inversionista/editar-anuncio.jsp?anuncio=<%=anuncioTextoImagen.getIdAnuncio()%>&id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
             </div>
             <%
                     } else if (anuncio instanceof AnuncioVideo) {
@@ -83,7 +83,7 @@
                 <p>Vigencia en Dias: <%=anuncioVideo.getVigenciaDias()%></p>
                 <p>Esta Activo: <%=anuncioVideo.isIsActivo()%></p>
                 <p>Costo: <%=anuncioVideo.getPrecio()%></p>
-                <a href="inversionista/editar-anuncio.jsp?id=<%=anuncioVideo.getIdAnuncio()%>">Editar</a>
+                <a href="inversionista/editar-anuncio.jsp?anuncio=<%=anuncioVideo.getIdAnuncio()%>&id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Editar</a>
             </div>
             <%
                     }

@@ -30,7 +30,7 @@ public class CreadorSuscripcion {
         try {
             nuevaSuscripcion.setFechaSuscripcion(LocalDate.parse(request.getParameter("fecha")));
         } catch (DateTimeParseException e) {
-            throw new UserDataInvalidException("Error en el Campo de la Fecha");
+            throw new UserDataInvalidException("Error en el Campo de la Fecha, Debe Ingresar una Fecha Valida");
         }
         this.isValidateCreation(nuevaSuscripcion);
         return nuevaSuscripcion;

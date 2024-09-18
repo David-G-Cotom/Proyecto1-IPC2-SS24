@@ -31,7 +31,7 @@ public class CreadorComentario {
     }
 
     private void isValidateCreation(Comentario comentario) throws UserDataInvalidException {
-        if (comentario.getContenido() == null) {
+        if (comentario.getContenido().equals("")) {
             throw new UserDataInvalidException("Debe completar el Campo para el Contenido del Comentario para la Revista");
         }
     }

@@ -97,7 +97,7 @@ public class RevistaDB {
         }
     }
 
-    public ArrayList<Revista> getRevistas(int idEditor) {
+    public ArrayList<Revista> getRevistasEditor(int idEditor) {
         String query = "SELECT * FROM revista WHERE editor = ?";
         ArrayList<Revista> revistas = new ArrayList<>();
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
@@ -112,6 +112,9 @@ public class RevistaDB {
                     String categoria = this.getCategoria(idCategoria);
                     ArrayList<EtiquetaEnum> etiquetas = this.getEtiquetas(idRevista);
                     Revista revista = new Revista(descripcion, CategoriaEnum.valueOf(categoria), etiquetas, likes, nombre, idRevista);
+                    revista.setPuedeComentarse(resul.getBoolean("estado_comentarios"));
+                    revista.setPuedeSuscribirse(resul.getBoolean("estado_suscripcion"));
+                    revista.setPuedeTenerLikes(resul.getBoolean("estado_likes"));
                     revistas.add(revista);
                 }
             } catch (SQLException e) {

@@ -35,12 +35,16 @@
                         <p>Descripcion de Revista: <%=revista.getDescripcion()%></p>
                         <p>Categoria: <%=revista.getCategoria()%></p>
                         <p>Etiquetas: <%=revista.getEtiquetas()%></p>
-                        <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>">Leer</a>                   
-                        <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>">Descargar</a>
-                        <a href="suscriptor/nuevo-comentario.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getAttribute("idUsuario")%>">Comentar</a>                   
+                        <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>" target="_blank">Leer</a>                   
+                        <a href="${pageContext.servletContext.contextPath}/PdfControlerServlet?id=<%=revista.getIdRevista()%>" target="_blank">Descargar</a>
                         <a href="${pageContext.servletContext.contextPath}/PerfilEditorServlet?id=<%=revista.getAutor().getIdEditor()%>">Perfil de Autor</a>
                         <%
-                            if(!dataSuscripcion.revistaConLike(revista.getIdRevista(), idSuscriptor)) {
+                            if (revista.isPuedeComentarse()) {
+                        %>
+                        <a href="suscriptor/nuevo-comentario.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getAttribute("idUsuario")%>">Comentar</a>                   
+                        <%
+                            }
+                            if(revista.isPuedeTenerLikes() && !dataSuscripcion.revistaConLike(revista.getIdRevista(), idSuscriptor)) {
                         %>
                         <a href="${pageContext.servletContext.contextPath}/LikeServlet?revista=<%=revista.getIdRevista()%>&id=<%=request.getAttribute("idUsuario")%>">Dar Like</a>                            
                         <%

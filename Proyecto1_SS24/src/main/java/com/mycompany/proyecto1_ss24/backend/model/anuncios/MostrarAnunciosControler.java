@@ -24,6 +24,9 @@ public class MostrarAnunciosControler {
     public MostrarAnunciosControler() {
         anuncios = dataAnuncios.getAllAnunciosActivos();
         cantidadAnuncios = anuncios.size();
+        if (cantidadAnuncios == 0) {
+            return;
+        }
         this.dividirAnuncios();
     }
 

@@ -40,7 +40,7 @@ public class FiltroRevistasServlet extends HttpServlet {
         String[] categorias = request.getParameterValues("categorias");
         if (etiquetas == null && categorias == null) {
             try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>Si quiere ver Todas las Revistas Regrese a la interfaz principal en la Parte de Aabajo</h1>");
+                out.println("<h1>Si quiere ver Todas las Revistas Regrese a la interfaz principal en la Parte de Abajo</h1>");
             }
             return;
         }

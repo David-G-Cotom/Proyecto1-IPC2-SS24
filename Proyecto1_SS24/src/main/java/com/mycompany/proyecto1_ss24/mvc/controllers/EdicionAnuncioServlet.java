@@ -5,6 +5,8 @@
 package com.mycompany.proyecto1_ss24.mvc.controllers;
 
 import com.mycompany.proyecto1_ss24.backend.data.AnuncioDB;
+import com.mycompany.proyecto1_ss24.backend.data.PerfilDB;
+import com.mycompany.proyecto1_ss24.backend.model.users.UsuarioAplicacion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -46,6 +48,7 @@ public class EdicionAnuncioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         boolean puedeMostrarse = request.getParameter("estado").equals("SI");
         AnuncioDB dataRevista = new AnuncioDB();
         if (!dataRevista.editarAnuncio(idAnuncio, puedeMostrarse)) {
@@ -53,9 +56,10 @@ public class EdicionAnuncioServlet extends HttpServlet {
                 out.println("<h1>NO Se pudo Cambiar el Estado del Anuncio</h1>");
             }
         }
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<h1>Se Cambio el Estados del Anuncio Correctamente</h1>");
-        }
+        PerfilDB data = new PerfilDB();
+            UsuarioAplicacion usuario = data.getUsuario(idUsuario);
+            request.setAttribute("usuarioLogeado", usuario);
+            request.getRequestDispatcher("/inversionista/interfaz-principal.jsp").forward(request, response);
     }
 
 }

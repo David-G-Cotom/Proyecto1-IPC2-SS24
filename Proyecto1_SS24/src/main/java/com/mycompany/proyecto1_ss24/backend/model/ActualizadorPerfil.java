@@ -41,7 +41,6 @@ public class ActualizadorPerfil {
         InputStream inputStream;
         try {
             filePart = request.getPart("imagefile");
-            System.out.println(filePart.getSubmittedFileName());
             inputStream = filePart.getInputStream();
             usuario.setFoto(inputStream);
         } catch (ServletException | IOException e) {

@@ -53,8 +53,10 @@ public class SuscripcionDB {
                 prepared.setInt(1, idRevistaNoSuscrita);
                 try (ResultSet resul = prepared.executeQuery()) {
                     if (resul.next()) {
-                        Revista revista = this.crearPOJORevista(resul);
-                        revistas.add(revista);
+                        if (resul.getBoolean("estado_suscripcion")) {
+                            Revista revista = this.crearPOJORevista(resul);
+                            revistas.add(revista);
+                        }
                     }
                 } catch (SQLException e) {
                     System.out.println("Error en recibir la Revista NO Suscrita: " + e);
@@ -109,6 +111,9 @@ public class SuscripcionDB {
         editor.setNombre(nombreEditor);
         editor.setIdEditor(idEditor);
         revista.setAutor(editor);
+        revista.setPuedeComentarse(resul.getBoolean("estado_comentarios"));
+        revista.setPuedeSuscribirse(resul.getBoolean("estado_suscripcion"));
+        revista.setPuedeTenerLikes(resul.getBoolean("estado_likes"));
         return revista;
     }
 

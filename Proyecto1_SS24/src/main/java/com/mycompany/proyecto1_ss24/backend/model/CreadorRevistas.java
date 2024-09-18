@@ -46,7 +46,7 @@ public class CreadorRevistas {
         } catch (IOException | ServletException ex) {
             throw new UserDataInvalidException("Error en el Campo para Seleccionar el Archivo");
         } catch (DateTimeParseException e) {
-            throw new UserDataInvalidException("Error en el Campo de la Fecha");
+            throw new UserDataInvalidException("Error en el Campo de la Fecha, Debe ingresar una Fecha Valida");
         }
         nuevaRevista.setCategoria(CategoriaEnum.valueOf(request.getParameter("categoria")));
         String[] etiquetas = request.getParameterValues("tags");
@@ -73,13 +73,13 @@ public class CreadorRevistas {
     }
     
     private void isValidateCreation(Revista revista, String fileName) throws UserDataInvalidException {
-        if (revista.getNombreRevista() == null) {
+        if (revista.getNombreRevista().equals("")) {
             throw new UserDataInvalidException("Debe completar el Campo para el Nombre de la Revista");
         }
-        if (revista.getDescripcion() == null) {
+        if (revista.getDescripcion().equals("")) {
             throw new UserDataInvalidException("Debe completar el Campo para la Descripcion de la Revista");
         }
-        if (revista.getArchivoPDF() == null) {
+        if (fileName.equals("")) {
             throw new UserDataInvalidException("Debe Seleccionar un Archivo PDF para la Revista");
         }
         if (!fileName.toLowerCase().endsWith(".pdf")) {

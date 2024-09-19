@@ -29,6 +29,7 @@
                 <li><a href="#">Reporte de Anuncios Comprados</a></li>
                 <li><a href="#">Reporte de las Revistas mas Populares</a></li>
                 <li><a href="#">Reporte de las Revistas mas Comentadas</a></li>
+                <li><a href="index.jsp">Cerrar Sesion</a></li>
             </ul>
         </div>
         <div class="content">

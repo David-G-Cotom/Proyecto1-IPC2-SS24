@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 
 /**
  *
@@ -44,6 +45,8 @@ public class CreadorUsuario {
         }
         String tipoUsuario = request.getParameter("usertype");
         this.isValidateCreation(usuario, filePart.getSubmittedFileName(), tipoUsuario);
+        String codificado = Base64.getEncoder().encodeToString(usuario.getPassword().getBytes());
+        usuario.setPassword(codificado);
         int idTipoUsuario = this.dataUsuario.getIdTipoUsuario(tipoUsuario);
         usuario.setIdTipoUsuario(idTipoUsuario);
         return usuario;
@@ -83,7 +86,7 @@ public class CreadorUsuario {
     private void isUsuarioExistente(String userName, String password) throws UserActionInvalidException {
         UsuarioAplicacion usuarioExistente = this.dataUsuario.getUsuario(userName, password);
         if (usuarioExistente != null) {
-            throw new UserActionInvalidException("El los Datos del Username y el Passwor son Incorrectas");
+            throw new UserActionInvalidException("Los Datos del Username y el Passwor son Incorrectas. Intente con otros Datos");
         }
     }
     

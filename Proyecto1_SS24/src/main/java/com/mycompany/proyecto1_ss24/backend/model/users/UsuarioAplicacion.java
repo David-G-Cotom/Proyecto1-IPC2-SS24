@@ -11,7 +11,7 @@ import java.io.InputStream;
  * @author Carlos Cotom
  */
 public class UsuarioAplicacion {
-    
+
     private InputStream foto;
     private String hobbies;
     private String temasInteres;
@@ -25,7 +25,7 @@ public class UsuarioAplicacion {
 
     public UsuarioAplicacion() {
     }
-    
+
     public UsuarioAplicacion(InputStream foto, String hobbies, String temasInteres, String descripcion, String gustos, String userName, String password, int tipoUsuario, String nombre, int idUsuario) {
         this.foto = foto;
         this.hobbies = hobbies;
@@ -44,7 +44,7 @@ public class UsuarioAplicacion {
         this.password = password;
         this.idTipoUsuario = tipoUsuario;
         this.nombre = nombre;
-    }        
+    }
 
     public InputStream getFoto() {
         return foto;
@@ -85,14 +85,6 @@ public class UsuarioAplicacion {
     public void setGustos(String gustos) {
         this.gustos = gustos;
     }
-    
-    public void actualizarPerfil() {
-        
-    }
-    
-    public void verPerfil() {
-        
-    }
 
     public String getUserName() {
         return userName;
@@ -108,7 +100,7 @@ public class UsuarioAplicacion {
 
     public void setPassword(String password) {
         this.password = password;
-    } 
+    }
 
     public int getIdTipoUsuario() {
         return idTipoUsuario;
@@ -133,5 +125,5 @@ public class UsuarioAplicacion {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
 }

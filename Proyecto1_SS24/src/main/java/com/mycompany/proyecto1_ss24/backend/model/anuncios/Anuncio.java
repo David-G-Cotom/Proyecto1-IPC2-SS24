@@ -117,8 +117,4 @@ public class Anuncio {
                 + "<br>tipoDeAnuncio = " + tipoAnuncio + '}';
     }
     
-    public void cambiarEstado() {
-        
-    }
-    
 }

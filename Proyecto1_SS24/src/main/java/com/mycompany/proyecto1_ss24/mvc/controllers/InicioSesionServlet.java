@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 
 /**
  *
@@ -41,8 +42,9 @@ public class InicioSesionServlet extends HttpServlet {
             }
             return;
         }
+        String codificado = Base64.getEncoder().encodeToString(password.getBytes());
         LogInUsuarioDB dataUsuario = new LogInUsuarioDB();
-        UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, password);
+        UsuarioAplicacion usuario = dataUsuario.getUsuario(userName, codificado);
         if (usuario == null) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<h1>NO EXISTE EL USUARIO</h1>");

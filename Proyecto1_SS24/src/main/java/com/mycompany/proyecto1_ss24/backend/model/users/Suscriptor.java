@@ -33,42 +33,4 @@ public class Suscriptor extends UsuarioAplicacion {
         this.revistasSuscritas = revistasSuscritas;
     }
     
-    public boolean suscribirse(Revista revista) {
-        
-        return false;
-        
-    }
-    
-    public void leerRevista(Revista revista) {
-        
-    }
-    
-    public Revista buscarRevista() {
-        
-        return null;
-        
-    }
-    
-    public void hacerComentario(Revista revista) {
-        
-    }
-    
-    public void verPerfilAutor(Revista revista) {
-        
-    }
-    
-    public void darLike(Revista revsita) {
-        
-    }
-    
-    public void descargarRevista(Revista revsita) {
-        
-    }
-    
-    public String establecerFechaSuscripcion() {
-        
-        return null;
-        
-    }
-    
 }

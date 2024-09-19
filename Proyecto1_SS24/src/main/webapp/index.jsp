@@ -33,7 +33,7 @@
             ArrayList<Anuncio> anunciosIzquierda = dataAnuncios.getAnunciosIzquierda();
             ArrayList<Anuncio> anunciosDerecha = dataAnuncios.getAnunciosDerecha();
         %>
-        <div id="left-sidebar" class="sidebar">
+        <div id="left-sidebar" class="sidebar" style="width: 250px; background-color: #e3e3e3;">
             <%
                 for(Anuncio anuncio : anunciosIzquierda) {
                     if (anuncio instanceof AnuncioTexto) {
@@ -68,7 +68,7 @@
                 }
             %>   
         </div>
-        <div id="content-block">
+        <div id="content-block" style="margin: 60px 300px;">
             <%
                 ArrayList<Revista> revistas = new ArrayList<>();
                 PreciosRevistaDB dataRevistas = new PreciosRevistaDB();
@@ -88,7 +88,7 @@
                 }
             %>
         </div>
-        <div id="right-sidebar" class="sidebar">
+        <div id="right-sidebar" class="sidebar" style="width: 250px; background-color: #e3e3e3;">
             <%
                 for(Anuncio anuncio : anunciosDerecha) {
                     if (anuncio instanceof AnuncioTexto) {

@@ -54,26 +54,4 @@ public class Inversionista extends UsuarioAplicacion {
         this.pagosHechos = pagosHechos;
     }
     
-    public boolean comprarAnuncio(Anuncio anuncio) {
-        
-        return false;
-        
-    }
-    
-    public boolean recargarCredito() {
-        
-        return false;
-        
-    }
-    
-    public void desactivarAnuncio(Anuncio anuncio) {
-        
-    }
-    
-    public String establecerFechaPago() {
-        
-        return null;
-        
-    }
-    
 }

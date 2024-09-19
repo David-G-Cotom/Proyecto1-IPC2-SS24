@@ -42,7 +42,7 @@ public class VideoControlerServlet extends HttpServlet {
             streamImage.read(contenidoVideo, 0, sizeContenido);
             response.getOutputStream().write(contenidoVideo);
         } catch (IOException e) {
-            System.out.println("Error en la escritura de la Imagen para mostrarla en le Navegador");
+            System.out.println("Error en la escritura del Video para el Anuncio y mostrarlo en le Navegador: " + e);
         }
     }
 

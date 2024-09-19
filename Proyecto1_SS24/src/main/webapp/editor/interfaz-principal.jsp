@@ -26,6 +26,7 @@
                 <li><a href="#">Reporte de Comentarios</a></li>
                 <li><a href="#">Reporte de Suscripciones</a></li>
                 <li><a href="#">Reporte de Revistas Top</a></li>
+                <li><a href="index.jsp">Cerrar Sesion</a></li>
             </ul>
         </div>
         <div class="content">

@@ -35,7 +35,7 @@
                     <p>Etiquetas: <%=revista.getEtiquetas()%></p>
                     <p>Nombre del Autor: <%=revista.getAutor().getNombre()%></p>
                     <p>Likes: <%=revista.getLikes()%></p>
-                    <a href="nueva-suscripcion.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getParameter("id")%>" target="_blank">Suscribir</a>
+                    <a href="nueva-suscripcion.jsp?revista=<%=revista.getIdRevista()%>&id=<%=request.getParameter("id")%>">Suscribir</a>
                 </div>
             <%
                 }

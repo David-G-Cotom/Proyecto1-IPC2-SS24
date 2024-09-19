@@ -30,6 +30,7 @@
                 <li><a href="inversionista/comprar-anuncio-video.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Comprar Anuncio de Video</a></li>
                 <li><a href="${pageContext.servletContext.contextPath}/PerfilServlet?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Perfil</a></li>
                 <li><a href="inversionista/recargar-credito.jsp?id=${sessionScope.usuarioLogeado}${usuarioLogeado.getIdUsuario()}">Recargar Credito</a></li>
+                <li><a href="index.jsp">Cerrar Sesion</a></li>
             </ul>
         </div>
         <div class="content">

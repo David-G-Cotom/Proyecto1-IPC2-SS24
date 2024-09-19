@@ -45,42 +45,4 @@ public class Editor extends UsuarioAplicacion {
         this.idEditor = idEditor;
     }
     
-    public void publicarRevista() {
-        
-    }
-    
-    public void permitirComentarios(Revista revista) {
-        
-    }
-    
-    public void permitirLikes(Revista revista) {
-        
-    }
-    
-    public void permitirSuscripciones(Revista revista) {
-        
-    }
-    
-    public void verReporteComentarios() {
-        
-    }
-    
-    public void verReporteSuscripciones() {
-        
-    }
-    
-    public void verReporteTopRevistas() {
-        
-    }
-    
-    public void establecerFechaCreacion(Revista revista) {
-        
-    }
-            
-    public boolean exportarReporte() {
-        
-        return false;
-        
-    }
-    
 }

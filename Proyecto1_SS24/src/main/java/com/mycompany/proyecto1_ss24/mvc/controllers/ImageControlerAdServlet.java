@@ -42,7 +42,7 @@ public class ImageControlerAdServlet extends HttpServlet {
             streamImage.read(contenidoImage, 0, sizeContenido);
             response.getOutputStream().write(contenidoImage);
         } catch (IOException e) {
-            System.out.println("Error en la escritura de la Imagen del Anuncio para mostrarla en le Navegador");
+            System.out.println("Error en la escritura de la Imagen del Anuncio para mostrarla en le Navegador: " + e);
         }
     }
 

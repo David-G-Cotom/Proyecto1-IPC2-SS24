@@ -19,6 +19,7 @@ body {
     height: 100vh;
     padding: 15px;
     box-sizing: border-box;
+    overflow-y: auto;
     position: fixed;
 }
 

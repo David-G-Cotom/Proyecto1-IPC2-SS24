@@ -31,6 +31,7 @@ public class Revista {
     private InputStream archivoPDF;
     private byte[] bytesArchivo;
     private int idRevista;
+    private double costoGlobal;
 
     public Revista() {
     }
@@ -188,6 +189,14 @@ public class Revista {
 
     public void setIdRevista(int idRevista) {
         this.idRevista = idRevista;
+    }
+
+    public double getCostoGlobal() {
+        return costoGlobal;
+    }
+
+    public void setCostoGlobal(double costoGlobal) {
+        this.costoGlobal = costoGlobal;
     }
 
     @Override

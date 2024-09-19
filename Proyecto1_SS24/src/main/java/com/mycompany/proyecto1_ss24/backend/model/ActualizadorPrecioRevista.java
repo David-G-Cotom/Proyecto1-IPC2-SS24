@@ -17,26 +17,40 @@ public class ActualizadorPrecioRevista {
     private final PreciosRevistaDB dataPrecios = new PreciosRevistaDB();
     
     public void actualizarPrecioRevista(HttpServletRequest request, int idRevista) throws UserDataInvalidException {
-        double precio = this.extraerYValidar(request);
-        this.dataPrecios.actualizarPrecioRevista(precio, idRevista);
+        double[] precio = this.extraerYValidar(request);
+        this.dataPrecios.actualizarPrecioRevista(precio[0], precio[1], idRevista);
     }
     
-    private double extraerYValidar(HttpServletRequest request) throws UserDataInvalidException {
-        double precio;
-        String precioData = request.getParameter("precio");
-        this.isValidateCreation(precioData);
-        precio = Double.parseDouble(precioData);
-        return precio;
+    private double[] extraerYValidar(HttpServletRequest request) throws UserDataInvalidException {
+        double precioDia;
+        double precioGlobal;
+        double[] precios = new double[2];
+        String precioDiaData = request.getParameter("precio");
+        String precioGlogalData = request.getParameter("precioGlobal");
+        this.isValidateCreation(precioDiaData, precioGlogalData);
+        precioDia = Double.parseDouble(precioDiaData);
+        precioGlobal = Double.parseDouble(precioGlogalData);
+        precios[0] = precioDia;
+        precios[1] = precioGlobal;
+        return precios;
     }
     
-    private void isValidateCreation(String preciodata) throws UserDataInvalidException {
+    private void isValidateCreation(String precioDia, String precioGlobal) throws UserDataInvalidException {
         try {
-            double precioAnuncioTexto = Double.parseDouble(preciodata);
+            double precioAnuncioTexto = Double.parseDouble(precioDia);
             if (precioAnuncioTexto < 0) {
-                throw new UserDataInvalidException("Debe Colocar un Numero Positivo en el Campo para el Precio de la Revista");
+                throw new UserDataInvalidException("Debe Colocar un Numero Positivo en el Campo para el Precio por Dia de la Revista");
             }
         } catch (NumberFormatException e) {
-            throw new UserDataInvalidException("Debe Colocar un Numero en el Campo para el Precio de la Revista");
+            throw new UserDataInvalidException("Debe Colocar un Numero en el Campo para el Precio por Dia de la Revista");
+        }
+        try {
+            double precioAnuncioTexto = Double.parseDouble(precioGlobal);
+            if (precioAnuncioTexto < 0) {
+                throw new UserDataInvalidException("Debe Colocar un Numero Positivo en el Campo para el Precio Global de la Revista");
+            }
+        } catch (NumberFormatException e) {
+            throw new UserDataInvalidException("Debe Colocar un Numero en el Campo para el Precio Global de la Revista");
         }
     }
     

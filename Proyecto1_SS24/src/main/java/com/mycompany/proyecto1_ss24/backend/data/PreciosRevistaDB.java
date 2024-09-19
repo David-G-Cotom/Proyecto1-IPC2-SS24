@@ -31,6 +31,7 @@ public class PreciosRevistaDB {
             while (resul.next()) {
                 Revista revista = this.crearPOJORevista(resul);
                 revista.setCosto(resul.getDouble("costo"));
+                revista.setCostoGlobal(resul.getDouble("costo_global"));
                 revistas.add(revista);
             }
         } catch (SQLException e) {
@@ -151,11 +152,12 @@ public class PreciosRevistaDB {
         return nombreEditor;
     }
     
-    public void actualizarPrecioRevista(double precio, int idRevista) {
-        String query = "UPDATE revista SET costo = ? WHERE id_revista = ?";
+    public void actualizarPrecioRevista(double precioDia, double precioGlobal, int idRevista) {
+        String query = "UPDATE revista SET costo = ?, costo_global = ? WHERE id_revista = ?";
         try (PreparedStatement prepared = this.connection.prepareStatement(query)) {
-            prepared.setDouble(1, precio);
-            prepared.setInt(2, idRevista);
+            prepared.setDouble(1, precioDia);
+            prepared.setDouble(2, precioGlobal);
+            prepared.setInt(3, idRevista);
             prepared.executeUpdate();
             System.out.println("Precio de la Revista Actualizado!!!");
         } catch (SQLException e) {

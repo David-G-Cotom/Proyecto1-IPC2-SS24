@@ -103,6 +103,8 @@
                             <div class="input-group">
                                 <label for="precio">Precio por Dia Actual: </label>
                                 <input type="text" id="precio" name="precio" value="<%=revista.getCosto()%>"/>
+                                <label for="precioGlobal">Precio Global Actual: </label>
+                                <input type="text" id="precioGlobal" name="precioGlobal" value="<%=revista.getCostoGlobal()%>"/>
                                 <button type="submit">Cambiar</button>
                             </div>
                         </form>
